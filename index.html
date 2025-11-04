@@ -107,7 +107,7 @@
     }
 
     async function addComment({ placeId, nick, text, imgs }) {
-      const res = await fetch(`${SB_URL}/rest/v1/comments`, {
+      const res = await fetch(`${SB_URL}/rest/v1/comments`, { 
         method: 'POST',
         headers: {
           apikey: SB_KEY,
