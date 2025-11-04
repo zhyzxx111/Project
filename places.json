@@ -1799,6 +1799,21 @@
         "点心",
         "本地风味"
       ]
+    },
+        {
+      "title": "广州市·岭南花卉市场",
+      "category": "生活方式",
+      "coords": [
+        23.0833,
+        113.2333
+      ],
+      "description": "华南最大花卉集散地，年宵花枢纽",
+      "video": "https://www.bilibili.com/video/BV1h841177hT",
+      "tags": [
+        "年宵花",
+        "盆栽",
+        "鲜切花"
+      ]
     }
   ],
   "flows": [
