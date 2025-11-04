@@ -122,6 +122,85 @@
 
     const iconMap = { '饮食':'🍜', '节庆':'🎎', '语言':'🈶', '生活方式':'🏙️', '非遗艺术':'🪭', '建筑记忆':'🏯' };
     const escapeHTML = (s='') => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    /* ======= 新增：YouTube 优雅降级工具 ======= */
+    function ytParseId(input='') {
+      const s = String(input).trim();
+      return (
+        s.match(/youtu\.be\/([^?&#/]+)/)?.[1] ||
+        s.match(/[?&#]v=([^?&#/]+)/)?.[1] ||
+        s.match(/\/shorts\/([^?&#/]+)/)?.[1] ||
+        (s.length === 11 ? s : null)
+      );
+    }
+    function ytEmbedUrl(id) {
+      return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1&origin=${encodeURIComponent(location.origin)}`;
+    }
+    function ytWatchUrl(id) { return `https://www.youtube.com/watch?v=${id}`; }
+    function ytThumb(id) { return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
+
+    function renderYouTubeGracefully(container, input) {
+      const id = ytParseId(input);
+      if (!id) {
+        // 非 YouTube：走原生 iframe
+        const iframe = document.createElement('iframe');
+        iframe.loading = 'lazy';
+        iframe.src = input;
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        // 包一层以应用 16:9 样式
+        const wrap = document.createElement('div');
+        wrap.className = 'video-wrapper';
+        wrap.appendChild(iframe);
+        container.appendChild(wrap);
+        return;
+      }
+
+      // 1) 缩略图 + 外链（始终可用）
+      const fallback = document.createElement('a');
+      fallback.href = ytWatchUrl(id);
+      fallback.target = '_blank';
+      fallback.rel = 'noopener noreferrer';
+      fallback.style.display = 'block';
+      fallback.style.position = 'relative';
+      fallback.style.borderRadius = '12px';
+      fallback.style.overflow = 'hidden';
+      fallback.innerHTML = `
+        <img src="${ytThumb(id)}" alt="YouTube thumbnail" style="width:100%;display:block">
+        <span style="position:absolute;inset:0;display:grid;place-items:center">
+          <button style="padding:8px 12px;border:none;border-radius:999px;background:#0009;color:#fff">
+            在 YouTube 打开
+          </button>
+        </span>
+      `;
+      container.appendChild(fallback);
+
+      // 2) 试图内嵌 iframe
+      const iframe = document.createElement('iframe');
+      iframe.loading = 'lazy';
+      iframe.src = ytEmbedUrl(id);
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+
+      const wrap = document.createElement('div');
+      wrap.className = 'video-wrapper';
+      wrap.appendChild(iframe);
+
+      container.replaceChild(wrap, fallback);
+
+      // 3) 超时降级（153/地区/策略拦截）
+      const timeout = setTimeout(() => {
+        if (container.contains(wrap)) {
+          container.replaceChild(fallback, wrap);
+        }
+      }, 1800);
+
+      iframe.addEventListener('load', () => clearTimeout(timeout));
+    }
+    /* ======= 优雅降级工具结束 ======= */
+
     function emojiIcon(e){return L.divIcon({html:`<div style="font-size:20px">${e}</div>`,className:'emoji-icon',iconSize:[24,24],iconAnchor:[12,24],popupAnchor:[0,-20]});}
     function placeId(p){ const base=(p.title||'')+'|'+(Array.isArray(p.coords)?p.coords.join(','):''); let h=0; for(let i=0;i<base.length;i++){ h=((h<<5)-h)+base.charCodeAt(i); h|=0; } return 'p'+(h>>>0); }
 
@@ -167,12 +246,14 @@
       const wrap=document.createElement('div'); wrap.className='popup';
       const h3=document.createElement('h3'); h3.textContent=p.title||''; wrap.appendChild(h3);
       const desc=document.createElement('p'); desc.textContent=p.description||''; wrap.appendChild(desc);
-      if(p.video){
-        const vw=document.createElement('div'); vw.className='video-wrapper';
-        const ifr=document.createElement('iframe');
-        ifr.loading='lazy'; ifr.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'; ifr.allowFullscreen=true; ifr.referrerPolicy='no-referrer';
-        ifr.src=p.video; vw.appendChild(ifr); wrap.appendChild(vw);
+
+      // ===== 使用优雅降级渲染视频 =====
+      if (p.video) {
+        const vbox = document.createElement('div');
+        renderYouTubeGracefully(vbox, p.video);
+        wrap.appendChild(vbox);
       }
+
       if(Array.isArray(p.tags)&&p.tags.length){
         const tags=document.createElement('div');
         p.tags.forEach(t=>{ const s=document.createElement('span'); s.className='tag'; s.textContent='#'+t; tags.appendChild(s); });
