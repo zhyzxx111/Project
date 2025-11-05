@@ -1808,11 +1808,25 @@
         113.2333
       ],
       "description": "华南最大花卉集散地，年宵花枢纽",
-      "video": https://www.bilibili.com/video/BV1h841177hT?t=2.9",
+      "video": "https://www.bilibili.com/video/BV1h841177hT",
       "tags": [
         "年宵花",
         "盆栽",
         "鲜切花"
+      ]
+    },
+        {
+      "title": "深圳市·香蜜湖四季花谷",
+      "category": "生活方式",
+      "coords": [
+        22.55,
+        114.0167
+      ],
+      "description": "深圳春节最火花市，可一站式买年货",
+      "video": "https://www.douyin.com/video/7183592017040051468",
+      "tags": [
+        "迎春花市",
+        "电话预约送货",
       ]
     }
   ],
