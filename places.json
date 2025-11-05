@@ -1828,7 +1828,502 @@
         "迎春花市",
         "电话预约送货"
       ]
-    }
+    },
+        {
+      "title": "珠海市·格馨花卉世界",
+      "category": "生活方式",
+      "coords": [
+        22.2667,
+        113.5667
+      ],
+      "description": "香洲区老牌花市，多肉品种齐全",
+      "video": "https://www.douyin.com/video/7188519813692575035",
+      "tags": [
+        "免费停车",
+        "近农科奇观"
+      ]
+    },
+        {
+      "title": "汕头市·金平区花卉市场",
+      "category": "生活方式",
+      "coords": [
+        23.3667,
+        116.6833
+      ],
+      "description": "粤东花卉集散中心，春节花价亲民",
+      "video": "https://www.douyin.com/video/7332051981244189986",
+      "tags": [
+        "批发零售",
+        "20亩展区"
+      ]
+    },
+        {
+      "title": "佛山市·陈村花卉世界",
+      "category": "生活方式",
+      "coords": [
+        22.9667,
+        113.2167
+      ],
+      "description": "全球级花卉产销综合体，永不落幕",
+      "video": "https://www.bilibili.com/video/BV1Tf4y1F78R/",
+      "tags": [
+        "盆栽",
+        "苗木",
+        "人造花全链"
+      ]
+    },
+        {
+      "title": "东莞市·麻涌蝴蝶兰基地",
+      "category": "生活方式",
+      "coords": [
+        23.0667,
+        113.55
+      ],
+      "description": "540万株年宵蝴蝶兰出产地",
+      "video": "https://tv.sohu.com/v/dXMvMzMzMzU3MTQ5LzM4NDM5MzcxMC5zaHRtbA==.html",
+      "tags": [
+        "基地直销",
+        "90个花卉园"
+      ]
+    },
+        {
+      "title": "中山市·中山花博园（沙岗墟）",
+      "category": "生活方式",
+      "coords": [
+        22.55,
+        113.3833
+      ],
+      "description": "20多年迎春花市历史，镇区花店互补",
+      "video": "https://www.douyin.com/video/7043344645878730014",
+      "tags": [
+        "品种全",
+        "价格稳"
+      ]
+    },
+        {
+      "title": "江门市·江海区花卉市场",
+      "category": "生活方式",
+      "coords": [
+        22.5833,
+        113.1167
+      ],
+      "description": "市区老牌批零兼营花市，年桔兰花齐全",
+      "video": "https://www.bilibili.com/video/BV1dR4y1z7wK/",
+      "tags": [
+        "一站式园艺资材"
+      ]
+    },
+        {
+      "title": "湛江市·海滨花卉交易中心",
+      "category": "生活方式",
+      "coords": [
+        21.2,
+        110.3833
+      ],
+      "description": "湛江最大鲜花批发港，龙船花特色",
+      "video": "https://www.douyin.com/video/7318453145347083557",
+      "tags": [
+        "价格低",
+        "新华路零售"
+      ]
+    },
+        {
+      "title": "惠州市·惠州市花卉市场（人民路）",
+      "category": "生活方式",
+      "coords": [
+        23.0833,
+        114.4167
+      ],
+      "description": "60年历史老市场，惠州批花首选",
+      "video": "https://www.douyin.com/video/7220334151679986955",
+      "tags": [
+        "玫瑰百合价优"
+      ]
+    },
+        {
+      "title": "梅州市·梅州市花卉市场（剑英公园周边）",
+      "category": "生活方式",
+      "coords": [
+        24.3,
+        116.1167
+      ],
+      "description": "客家特色年宵花市，城区花店分布广",
+      "video": "https://www.bilibili.com/video/BV19Jr6Y2ExT/",
+      "tags": [
+        "城区绿化重视"
+      ]
+    },
+        {
+      "title": "河源市·旺角花墟（源城区）",
+      "category": "生活方式",
+      "coords": [
+        23.75,
+        114.7
+      ],
+      "description": "市区唯一室内花市，多肉绿植丰富",
+      "video": "https://www.douyin.com/video/7318657896273759542",
+      "tags": [
+        "四季批发零售"
+      ]
+    },
+        {
+      "title": "阳江市·华园路花卉街",
+      "category": "生活方式",
+      "coords": [
+        21.85,
+        111.9667
+      ],
+      "description": "4万㎡露天花街，20+档口价格接地气",
+      "video": "https://www.douyin.com/video/7050707162749750528",
+      "tags": [
+        "年花",
+        "绣球",
+        "盆栽"
+      ]
+    },
+        {
+      "title": "清远市·清远花卉市场（清新区）",
+      "category": "生活方式",
+      "coords": [
+        23.6833,
+        113.0333
+      ],
+      "description": "春节各县区联动花市，平价年桔桃花",
+      "video": "https://www.douyin.com/video/7311661866244230463",
+      "tags": [
+        "花市",
+        "美食",
+        "年货"
+      ]
+    },
+        {
+      "title": "韶关市·武江芙蓉商业广场花市",
+      "category": "生活方式",
+      "coords": [
+        24.8,
+        113.6
+      ],
+      "description": "春节分区花市，500+品种价低",
+      "video": "https://www.bilibili.com/video/BV1tRFPeQEo4/",
+      "tags": [
+        "桃花区",
+        "美食区",
+        "年桔区"
+      ]
+    },
+        {
+      "title": "茂名市·官渡花卉市场（江东北路）",
+      "category": "生活方式",
+      "coords": [
+        21.6667,
+        110.9167
+      ],
+      "description": "市区老牌批零花街，创意小盆栽受年轻人欢迎",
+      "video": "https://www.douyin.com/video/7174776598086962484",
+      "tags": [
+        "电话订花",
+        "毛线花新品"
+      ]
+    },
+        {
+      "title": "肇庆市·花语谷（端州万石岗）",
+      "category": "生活方式",
+      "coords": [
+        23.05,
+        112.4667
+      ],
+      "description": "100亩花卉文旅小镇，DIY+学堂体验",
+      "video": "https://www.xiaohongshu.com/discovery/item/678d1513000000001801665f?source=webshare&xhsshare=pc_web&xsec_token=ABsEsS-wjbwf3yiqBab0zlvAcRuLZYATwExKUjG1zJFC4=&xsec_source=pc_share",
+      "tags": [
+        "玫瑰",
+        "康乃馨主题区"
+      ]
+    },
+        {
+      "title": "云浮市·新兴县鲜花批发市场",
+      "category": "生活方式",
+      "coords": [
+        22.7,
+        112.2333
+      ],
+      "description": "县域批发零售一体，节假日人潮涌动",
+      "video": "https://www.xiaohongshu.com/discovery/item/678b2617000000001602ae94?source=webshare&xhsshare=pc_web&xsec_token=ABwby2dJvvJWaRfcUlUlwuYFh-JDtkWt4RxOppkdN5edk=&xsec_source=pc_share",
+      "tags": [
+        "玫瑰百合",
+        "绿植资材"
+      ]
+    },
+        {
+      "title": "汕尾市·汕尾花卉市场（城区香洲路）",
+      "category": "生活方式",
+      "coords": [
+        22.7833,115.3667
+      ],
+      "description": "市区唯一综合花市，价格亲民",
+      "video": "https://www.xiaohongshu.com/discovery/item/65c4cd37000000000a013bad?source=webshare&xhsshare=pc_web&xsec_token=ABR7x_V2TESv2bqVXB3usC78L5t_6CqasfTgSANEuUIOw=&xsec_source=pc_share",
+      "tags": [
+        "盆景",
+        "园艺工具"
+      ]
+    },
+        {
+      "title": "潮州市·潮州花卉市场（西湖后广场）",
+      "category": "生活方式",
+      "coords": [
+        23.6667,116.6333
+      ],
+      "description": "古城最大花市，买花赏景一站式",
+      "video": "https://www.xiaohongshu.com/discovery/item/68f1de91000000000702201e?source=webshare&xhsshare=pc_web&xsec_token=ABmZMu38v6gXmKXUBL3Tmk1-Wli9cm8_nonAyBdGSBSnE=&xsec_source=pc_share",
+      "tags": [
+        "兰花",
+        "盆景",
+        "年桔"
+      ]
+    },
+        {
+      "title": "揭阳市·揭阳市花卉市场（榕华大道）",
+      "category": "生活方式",
+      "coords": [
+        23.55,116.3667
+      ],
+      "description": "市区老牌花市，春节元宵最热闹",
+      "video": "https://www.xiaohongshu.com/discovery/item/68ebc412000000000703a8ff?source=webshare&xhsshare=pc_web&xsec_token=ABwWEX2ZnWmrDSto3yPCKdeT--x6NNEO3G4CmPOBED1uU=&xsec_source=pc_share",
+      "tags": [
+        "园艺资材",
+        "盆景",
+        "年花"
+      ]
+    },
+        {
+      "title": "香港特别行政区·花墟（旺角花墟道）",
+      "category": "生活方式",
+      "coords": [
+        22.325,114.1667
+      ],
+      "description": "全港最大鲜花盆栽集散地，百年历史",
+      "video": "https://www.xiaohongshu.com/discovery/item/6613cb8c000000001a00f84c?source=webshare&xhsshare=pc_web&xsec_token=ABqf4gDDupm0DseF_HTi3OV6smwHG9tCVCDkZhB4ZVREE=&xsec_source=pc_share",
+      "tags": [
+        "园艺工具",
+        "进口花",
+        "春节桃花"
+      ]
+    },
+      {
+    "title": "广州市·珠江中大北门-广州大桥段",
+    "category": "节庆",
+    "coords": [23.0917, 113.2917],
+    "description": "广州国际龙舟邀请赛主赛场",
+    "video": "https://www.bilibili.com/video/BV1oo4y1776M/",
+    "tags": ["国际赛事", "600米直道竞速"]
+  },
+  {
+    "title": "深圳市·大鹏南澳月亮湾",
+    "category": "节庆",
+    "coords": [22.5333, 114.55],
+    "description": "深圳唯一海上龙舟赛，浪花飞溅",
+    "video": "https://news.qq.com/rain/a/20250530V08IN400?ptag=bing.com",
+    "tags": ["海上竞渡", "大湾区队伍"]
+  },
+  {
+    "title": "珠海市·金湾三灶祥祺湾",
+    "category": "节庆",
+    "coords": [22.0667, 113.3833],
+    "description": "海上龙舟+飞机起降同框",
+    "video": "https://www.bilibili.com/video/BV1QT411w7yo/",
+    "tags": ["600米竞速", "7200米绕标"]
+  },
+  {
+    "title": "汕头市·小公园龙舟广场",
+    "category": "节庆",
+    "coords": [23.3667, 116.6833],
+    "description": "老市区民间龙舟训练与竞渡点",
+    "video": "https://cq.ifeng.com/c/8jnty8lP8pD",
+    "tags": ["韩江水系", "社区自发"]
+  },
+  {
+    "title": "佛山市·叠滘河",
+    "category": "节庆",
+    "coords": [23.0167, 113.1],
+    "description": "水上F1”龙船漂移，S/L/C/J弯刺激",
+    "video": "https://www.bilibili.com/video/BV1ry411B737/",
+    "tags": ["狭窄弯道", "高速过弯"]
+  },
+  {
+    "title": "东莞市·万江/虎门河段",
+    "category": "节庆",
+    "coords": [22.95, 113.7333],
+    "description": "东莞龙舟第一景”龙舟月主会场",
+    "video": "https://www.bilibili.com/video/BV1FM4y1H76X/",
+    "tags": ["趁景+放标", "男女凤艇赛"]
+  },
+  {
+    "title": "江门市·蓬江区大泽龙舟文化公园",
+    "category": "节庆",
+    "coords": [22.5833, 113.0833],
+    "description": "省传统龙舟争霸赛七届举办地",
+    "video": "https://www.douyin.com/video/7377019194304498971",
+    "tags": ["往返竞速", "陈皮龙舟宴"]
+  },
+  {
+    "title": "湛江市·坡头乾塘/遂溪江洪",
+    "category": "节庆",
+    "coords": [21.1333, 110.3333],
+    "description": "海上龙舟浪花大，岸边千人呐喊",
+    "video": "https://www.bilibili.com/video/BV1nC7nzxES4/",
+    "tags": ["海上直道", "农产品市集"]
+  },
+  {
+    "title": "惠州市·金山湖公园/园洲镇",
+    "category": "节庆",
+    "coords": [23.0833, 114.4333],
+    "description": "市区湖景+乡镇民俗，非遗石湾习俗",
+    "video": "https://www.sohu.com/a/946011904_121275979",
+    "tags": ["家庭观赛", "体验互动"]
+  },
+  {
+    "title": "梅州市·梅江（东山大桥—剑英大桥）",
+    "category": "节庆",
+    "coords": [24.2833, 116.1167],
+    "description": "端午客家乡亲齐聚，鼓声震天",
+    "video": "https://www.bilibili.com/video/BV12f421X7Q6/",
+    "tags": ["母亲河", "传统祭江"]
+  },
+  {
+    "title": "河源市·和平林寨镇/东江段",
+    "category": "节庆",
+    "coords": [23.9333, 115.2333],
+    "description": "国际龙舟邀请赛，港澳队伍常参赛",
+    "video": "https://www.douyin.com/video/7366606270469606690",
+    "tags": ["IDBF规则", "电子计时"]
+  },
+  {
+    "title": "阳江市·漠阳江西濑（江城）",
+    "category": "节庆",
+    "coords": [21.8667, 111.9667],
+    "description": "逆水龙舟500年非遗，逆流竞速",
+    "video": "https://www.bilibili.com/video/BV1Ss4y1x7mH/",
+    "tags": ["千人龙船宴", "啤酒夜"]
+  },
+  {
+    "title": "清远市·北江（江心岛至众乐广场）",
+    "category": "节庆",
+    "coords": [23.7, 113.0333],
+    "description": "市区江面宽直，各县队伍齐聚",
+    "video": "https://699pic.com/video-809803.html",
+    "tags": ["公益观赛", "免费入场"]
+  },
+  {
+    "title": "韶关市·浈江北江桥—曲江桥",
+    "category": "节庆",
+    "coords": [24.8167, 113.5833],
+    "description": "2025省精英赛+俄罗斯队，32队竞速",
+    "video": "https://www.bilibili.com/video/BV1VT421e7BB/",
+    "tags": ["广府文化", "十二人小龙"]
+  },
+  {
+    "title": "茂名市·小东江（鳌头镇段）",
+    "category": "节庆",
+    "coords": [21.6667, 110.9167],
+    "description": "百年龙舟之乡”袂花江，400人观景台",
+    "video": "https://www.douyin.com/video/7377799923883855104",
+    "tags": ["乡村龙舟饭", "摄影赛"]
+  },
+  {
+    "title": "肇庆市·星湖中心湖",
+    "category": "节庆",
+    "coords": [23.0667, 112.4667],
+    "description": "七星岩脚下竞渡，山湖同框最美赛场",
+    "video": "https://www.xiaohongshu.com/discovery/item/68370fa90000000021018c29?source=webshare&xhsshare=pc_web&xsec_token=AB9XiTdblgYdES0axQQf91G9mTKfQuI0EB3euaXrD6kV4=&xsec_source=pc_share",
+    "tags": ["龙舟饼", "龙船饭体验"]
+  },
+  {
+    "title": "云浮市·罗定江滨公园泷江段",
+    "category": "节庆",
+    "coords": [22.7667, 111.5667],
+    "description": "非遗龙舟+千人龙舟饭+音乐灯光秀",
+    "video": "https://www.xiaohongshu.com/discovery/item/68d8a65a00000000120233f5?source=webshare&xhsshare=pc_web&xsec_token=ABNVBVyv_DmoB-YuHsXZLzVedR3oIG41fUtZltcDYxWWs=&xsec_source=pc_share",
+    "tags": ["汉服巡游", "文创市集"]
+  },
+  {
+    "title": "汕尾市·品清湖（罗马广场海域）",
+    "category": "节庆",
+    "coords": [22.7833, 115.3667],
+    "description": "市区内湖赛龙舟，观众岸边近距离",
+    "video": "https://www.xiaohongshu.com/discovery/item/683aabd7000000002001d1f4?source=webshare&xhsshare=pc_web&xsec_token=ABOO2xLGyFftb6jQnJLHBicZpXXzoxLAEe8qE4Add2Jg8=&xsec_source=pc_share",
+    "tags": ["免费入场", "文艺晚会"]
+  },
+  {
+    "title": "潮州市·韩江（广济桥上下游）",
+    "category": "节庆",
+    "coords": [23.6667, 116.6333],
+    "description": "古城墙下竞渡，龙舟与古桥同框",
+    "video": "https://www.xiaohongshu.com/discovery/item/683aef52000000000c03954d?source=webshare&xhsshare=pc_web&xsec_token=ABOO2xLGyFftb6jQnJLHBicRKwQH_ZOcg6cBekHjdiMdQ=&xsec_source=pc_share",
+    "tags": ["传统祭江", "民俗表演"]
+  },
+  {
+    "title": "揭阳市·榕江（揭东段）",
+    "category": "节庆",
+    "coords": [23.55, 116.4],
+    "description": "市区江面宽直，各县区队伍齐聚",
+    "video": "https://www.xiaohongshu.com/discovery/item/681f56bf000000002102cc8c?source=webshare&xhsshare=pc_web&xsec_token=ABppvv49uiZq6dP5Hib4kF-LqhmepoJIhIvH1pzwgi-iA=&xsec_source=pc_share",
+    "tags": ["传统放标", "趁景"]
+  },
+  {
+    "title": "香港特别行政区·维多利亚港（尖沙咀东）",
+    "category": "节庆",
+    "coords": [22.2917, 114.175],
+    "description": "国际龙舟邀请赛，维港天际线背景",
+    "video": "https://www.xiaohongshu.com/discovery/item/68450160000000002102c63a?source=webshare&xhsshare=pc_web&xsec_token=AB1Q6J-PQ1_TCMcxOa94cFQZO47-1DYoMTZBoRdAPsyRg=&xsec_source=pc_share",
+    "tags": ["公开/女子/国际组别"]
+  },
+  {
+    "title": "澳门特别行政区·南湾湖",
+    "category": "节庆",
+    "coords": [22.1889, 113.55],
+    "description": "澳门国际龙舟赛主舞台，湖面与主城景同框",
+    "video": "https://www.xiaohongshu.com/discovery/item/68333ff9000000002202693e?source=webshare&xhsshare=pc_web&xsec_token=ABGvFY_9PoMYv4e_2qUEBFkZh2Fbmp21SyZ2pvlKe33T8=&xsec_source=pc_share",
+    "tags": ["标准龙舟", "公开/女子组"]
+  },
+      {
+    "title": "广州市·海珠有轨电车1号线",
+    "category": "生活方式",
+    "coords": [23.0833, 113.3333],
+    "description": "广州塔—万胜围最美7.7公里”",
+    "video": "https://www.bilibili.com/video/BV1ih411i7yj/",
+    "tags": ["观景", "超级电容", "2元一票"]
+  },
+  {
+    "title": "深圳市·龙华现代有轨电车",
+    "category": "生活方式",
+    "coords": [22.6667, 114.0333],
+    "description": "清湖—新澜/下围，超级电容无网运行",
+    "video": "https://www.bilibili.com/video/BV1iK4y1n7tG/",
+    "tags": ["2元一票", "路口信号优先"]
+  },
+  {
+    "title": "佛山市·南海有轨电车1号线",
+    "category": "生活方式",
+    "coords": [23.0333, 113.15],
+    "description": "(虫雷)岗—林岳东，与广佛地铁换乘",
+    "video": "https://www.bilibili.com/video/BV1s44y1k7pd/",
+    "tags": ["14.3公里", "分段计价"]
+  },
+  {
+    "title": "香港特别行政区·香港电车（叮叮车）",
+    "category": "生活方式",
+    "coords": [22.2833, 114.1583],
+    "description": "1904年运营，全球最早双层电车，港岛北线",
+    "video": "https://www.xiaohongshu.com/discovery/item/68406096000000002300c1ca?source=webshare&xhsshare=pc_web&xsec_token=AB6wrXI_R-2asoSdTdUWxSrDNbA1dr3Ew37SHOOzow5uE=&xsec_source=pc_share",
+    "tags": ["2.6港币起", "文化符号"]
+  },
+  {
+    "title": "澳门特别行政区·澳门轻轨氹仔线",
+    "category": "生活方式",
+    "coords": [22.1528, 113.5597],
+    "description": "澳首条轨道交通，妈阁—氹仔码头，无人驾驶",
+    "video": "https://www.xiaohongshu.com/discovery/item/67f28fe2000000001c004448?source=webshare&xhsshare=pc_web&xsec_token=ABwnbDwJ-b-etUwm8CgB90m5K7I9z8KqzmgIgW6obgaPo=&xsec_source=pc_share",
+    "tags": ["跨海段", "机场/口岸换乘"]
+  }
   ],
   "flows": [
     {
