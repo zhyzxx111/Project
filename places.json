@@ -3614,7 +3614,158 @@
     "video": "https://www.xiaohongshu.com/explore/6865079900000000220328ac?xsec_token=ABMpYlJIVH3ZRtfP_edHJBGUVg6U_BCGXnpIHjxag57tA=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","客家","地道"]
   },
-
+  {
+    "name": "梅州·顺发茶餐厅",
+    "category": "饮食",
+    "coordinates": "116.13,24.26",
+    "description": "带有客家特色的港式冰室。",
+    "video": "https://www.xiaohongshu.com/explore/683f961a0000000023000354?xsec_token=ABCPOd1_ppsrtwgA8BBVa0yFrxLn2qundcbUxrCv6sen4=&xsec_source=pc_search&source=unknown",
+    "tags": ["冰室","客家","快餐"]
+  },
+  {
+    "name": "梅州·洪屋雪花冰室",
+    "category": "饮食",
+    "coordinates": "116.11,24.31",
+    "description": "主打冰沙甜品和糖水。",
+    "video": "https://www.xiaohongshu.com/explore/65c47b9d000000001100cc42?xsec_token=ABF4veQH_e_oC0cKsjHLYCD1i5piUeKgXJzbKqBsdtrp4=&xsec_source=pc_search&source=unknown",
+    "tags": ["糖水","客家","甜品"]
+  },
+  {
+    "name": "河源·金沙湾食府",
+    "category": "饮食",
+    "coordinates": "114.70,23.73",
+    "description": "河源地区知名的客家粤菜酒楼，早茶点心精致。",
+    "video": "https://www.xiaohongshu.com/explore/6299b949000000002103b797?xsec_token=ABTxq1FlBFOQI1iU8rGWlsSx1TramvRcIur_nNJUxCYh8=&xsec_source=pc_search&source=unknown",
+    "tags": ["早茶","客家","粤菜"]
+  },
+  {
+    "name": "河源·丰彩甜品",
+    "category": "饮食",
+    "coordinates": "114.71,23.75",
+    "description": "提供传统客家和广式糖水。",
+    "video": "https://www.xiaohongshu.com/explore/6703661e000000001902e735?xsec_token=ABu54OWo_Q3YSn9gxsQeraW9eRmGPLIqG-Jyl1HHJum9U=&xsec_source=pc_search&source=unknown",
+    "tags": ["糖水","甜品","客家"]
+  },
+  {
+    "name": "清远·清远迎宾馆",
+    "category": "饮食",
+    "coordinates": "113.06,23.68",
+    "description": "清远规模较大的酒楼，提供传统粤式早茶。",
+    "video": "https://www.xiaohongshu.com/explore/66cd2b3a000000001f016402?xsec_token=ABq5i2T9rT5a7OAxYIOmP2xDASfYjZV5Pgvm5l9QojyUw=&xsec_source=pc_search&source=unknown",
+    "tags": ["早茶","点心","粤菜"]
+  },
+  {
+    "name": "清远·达生香港茶餐厅",
+    "category": "饮食",
+    "coordinates": "113.07,23.67",
+    "description": "清远的港式冰室。",
+    "video": "https://www.xiaohongshu.com/explore/674190ec0000000002029278?xsec_token=AB6NSWcqeluBvb2peDcXMQRXATz1Ru--XKeGrs_uSWPJU=&xsec_source=pc_search&source=unknown",
+    "tags": ["冰室","港式","快餐"]
+  },
+  {
+    "name": "清远·仓钱街糖水店",
+    "category": "饮食",
+    "coordinates": "113.03,23.71",
+    "description": "市级非遗糖水店铺，传承五代，将手艺传承下去。",
+    "video": "https://www.xiaohongshu.com/explore/659fa6a8000000001c013c4c?xsec_token=ABeHdTgmI8Wdf9LAwZVPdtQoLveZutY7vM4nha6BDOy8Q=&xsec_source=pc_search&source=unknown",
+    "tags": ["糖水","甜品","地方特色"]
+  },
+  {
+    "name": "云浮·太平好姐饮食店",
+    "category": "饮食",
+    "coordinates": "112.26,22.64",
+    "description": "云浮本地人常去的街边餐档，早茶点心传统。",
+    "video": "https://www.xiaohongshu.com/explore/665b071a00000000160115fc?xsec_token=ABQGeYdB3joVG7HFBHTbXBP3ZcISo0igLfcxC880B8zuk=&xsec_source=pc_search&source=unknown",
+    "tags": ["早茶","点心","粤菜"]
+  },
+  {
+    "name": "云浮·开龙雀冰室",
+    "category": "饮食",
+    "coordinates": "112.02,22.92",
+    "description": "云浮市区的港式冰室。",
+    "video": "https://www.xiaohongshu.com/explore/66c0861c000000000d030c40?xsec_token=ABp2bZjwxQ-M3obVwfg2Th9oRy8YdnYMUgzwTgFH8Onrk=&xsec_source=pc_search&source=unknown",
+    "tags": ["冰室","港式","简餐"]
+  },
+  {
+    "name": "云浮·雪花甜品店",
+    "category": "饮食",
+    "coordinates": "112.04,22.93",
+    "description": "传统广式和本地糖水，如芝麻糊、花生糊。",
+    "video": "https://www.xiaohongshu.com/explore/66e40c62000000001201109b?xsec_token=ABykId-p-PjZtZS--SO9_eIpC4oVtavojyoAhc17m-jW0=&xsec_source=pc_search&source=unknown",
+    "tags": ["糖水","甜品","老字号"]
+  },
+  {
+    "name": "香港·莲香楼（中环）",
+    "category": "饮食",
+    "coordinates": "114.16,22.28",
+    "description": "极具老香港风情的茶楼，点心推车传统，充满怀旧感。",
+    "video": "https://www.xiaohongshu.com/explore/687b1499000000002201ec68?xsec_token=ABGugVAXxw1ctHtFUJhKIwEtWueKJXrwPimyCsJnWH2MY=&xsec_source=pc_search&source=unknown",
+    "tags": ["早茶","点心","老字号"]
+  },
+  {
+    "name": "香港·恭和堂凉茶",
+    "category": "饮食",
+    "coordinates": "114.18,22.32",
+    "description": "香港著名凉茶连锁店，龟苓膏和二十四味凉茶出名。",
+    "video": "https://www.xiaohongshu.com/explore/65e1b530000000000102a75a?xsec_token=ABYx8Hx-LUMufddOteMVY-hotUGsuUAL7-9lQaa3SE7R8=&xsec_source=pc_search&source=unknown",
+    "tags": ["凉茶","龟苓膏","清热"]
+  },
+  {
+    "name": "香港·兰芳园（中环总店）",
+    "category": "饮食",
+    "coordinates": "114.16,22.28",
+    "description": "丝袜奶茶发源地，历史悠久，是港式茶餐代表。",
+    "video": "https://www.xiaohongshu.com/explore/68638efa000000001002769a?xsec_token=ABaKoAj2Q2xte5XnquOzotvUyBMLnQub_RtU5wz4SHb-A=&xsec_source=pc_search&source=unknown",
+    "tags": ["茶餐厅","港式","奶茶"]
+  },
+  {
+    "name": "香港·发记甜品",
+    "category": "饮食",
+    "coordinates": "114.18,22.30",
+    "description": "香港连锁甜品店，以榴莲甜品和芒果系列闻名。",
+    "video": "https://www.xiaohongshu.com/explore/5ec7a2a5000000000101ed09?xsec_token=AB2vX8tB6I7dldedQovKfLj17GmlPS04IYag3S4401NZ4=&xsec_source=pc_search&source=unknown",
+    "tags": ["糖水","甜品","连锁"]
+  },
+  {
+    "name": "澳门·龙华茶楼",
+    "category": "饮食",
+    "coordinates": "113.55,22.20",
+    "description": "澳门仅存的古老茶楼之一，环境怀旧，推车点心。",
+    "video": "https://www.xiaohongshu.com/explore/65991f1d0000000012006a4b?xsec_token=AB4ouAAHgUDicCJQhdn_FRtpHFNC2674ae2csbNDg26qY=&xsec_source=pc_search&source=unknown",
+    "tags": ["早茶","点心","老字号"]
+  },
+  {
+    "name": "澳门·余保和凉茶世家(氹仔店)",
+    "category": "饮食",
+    "coordinates": "113.56,22.16",
+    "description": "澳门百年历史传统凉茶店，售卖各种祛湿清热茶饮。",
+    "video": "https://www.xiaohongshu.com/explore/668213dc000000001c0213c8?xsec_token=ABqIDHfroo-IG9Dn_tclEyL2sHH2kGyBITbdB8YQXbbjM=&xsec_source=pc_search&source=unknown",
+    "tags": ["凉茶","清热","地道"]
+  },
+  {
+    "name": "澳门·义顺牛奶公司",
+    "category": "饮食",
+    "coordinates": "113.54,22.19",
+    "description": "澳门老字号，以双皮奶、姜汁撞奶和猪扒包闻名。",
+    "video": "https://www.xiaohongshu.com/explore/68386943000000002001c43b?xsec_token=ABet2wXF1PhX0hYHwPNiQyLXFyoIZwL3Thy7ve-qpmx8M=&xsec_source=pc_search&source=unknown",
+    "tags": ["冰室","港式","双皮奶"]
+  },
+  {
+    "name": "澳门·莫义记大菜糕",
+    "category": "饮食",
+    "coordinates": "113.56,22.15",
+    "description": "澳门特色大菜糕（海藻冻）和榴莲雪糕。",
+    "video": "https://www.xiaohongshu.com/explore/66fa9428000000002a036a65?xsec_token=AB3Ol0vYOe365lqKEtoce5qPegKWOd1hsgYZCelK9OcGE=&xsec_source=pc_search&source=unknown",
+    "tags": ["糖水","甜品","澳门特色"]
+  },
+  {
+    "name": "澳门·百乐门粉面店",
+    "category": "饮食",
+    "coordinates": "113.55,22.21",
+    "description": "专注传统面食制作，店内怀旧，充满本土茶餐厅味道。",
+    "video": "https://www.xiaohongshu.com/explore/668125cf000000001e010be5?xsec_token=AB-Rt5eMN5vQ6r8WEmfTl1gZFQOutELg4yUhZZ3TkHmTM=&xsec_source=pc_search&source=unknown",
+    "tags": ["茶餐厅","港式","面食"]
+  },
   ],
   "flows": [
     {
