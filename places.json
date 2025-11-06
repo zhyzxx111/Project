@@ -3153,7 +3153,7 @@
  {
     "name": "广州·陶陶居（第十甫路总店）",
     "category": "饮食",
-    "coordinates": [113.24,23.11],
+    "coords": [113.24,23.11],
     "description": "百年老字号，被誉为“月饼泰斗”，虾饺烧卖等点心经典。",
     "video": "https://www.xiaohongshu.com/explore/67ee2b74000000001d01bb66?xsec_token=ABV4ay07UlZSuV7ruelB5FC_RK3VGmGjww7pPeQEMpZAQ=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","老字号"]
@@ -3161,7 +3161,7 @@
   {
     "title": "广州·黄振龙凉茶",
     "category": "饮食",
-    "coordinates": [113.43,23.13],
+    "coords": [113.43,23.13],
     "description": "广州本土知名凉茶连锁，种类丰富，功效多元，街边常见。",
     "video": "https://www.xiaohongshu.com/explore/64f00300000000001f03d746?xsec_token=ABm-t5f4k4fMb6Vmd8kVdqC37WeVI3XPHxAikBA_ufGoM=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","清热","地道饮品"]
@@ -3169,7 +3169,7 @@
   {
     "title": "广州·吴系茶餐厅",
     "category": "饮食",
-    "coordinates": [113.35,23.10],
+    "coords": [113.35,23.10],
     "description": "港式茶餐厅，菠萝油、蛋挞、奶茶等经典港味浓郁。",
     "video": "https://www.xiaohongshu.com/explore/66b8bdb70000000005038850?xsec_token=AB0Q0pE8ewF4-93tZ4XDFZ34Uy0KeU11GaJ2gsiwxFvJk=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","快餐"]
@@ -3177,7 +3177,7 @@
   {
     "title": "广州·百花甜品店",
     "category": "饮食",
-    "coordinates": [113.26,23.12],
+    "coords": [113.26,23.12],
     "description": "数十年历史的老字号，出品传统广式糖水，如红豆沙、芝麻糊。",
     "video": "https://www.xiaohongshu.com/explore/66b333a8000000001e01efe7?xsec_token=ABnliYymOmYEqnMKmOZFMogpLbXMCPzGAq9QcbNqIHRFo=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","老字号"]
@@ -3185,7 +3185,7 @@
   {
     "title": "深圳·春满园",
     "category": "饮食",
-    "coordinates": [114.24,22.71],
+    "coords": [114.24,22.71],
     "description": "深圳老牌粤菜酒楼，早茶精致，本地人商务宴请常选。",
     "video": "https://www.xiaohongshu.com/explore/68a0900a000000001d00d4e0?xsec_token=ABY259JAcMuT3WXhsfNV_xhL-b-4HJQlHv5dKq0Ol-WS8=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","粤菜"]
@@ -3193,7 +3193,7 @@
   {
     "title": "深圳·百草堂",
     "category": "饮食",
-    "coordinates": [113.93,22.49],
+    "coords": [113.93,22.49],
     "description": "深圳街头常见的传统凉茶铺，提供各种传统中草药饮品。",
     "video": "https://www.xiaohongshu.com/explore/680b1e47000000000f03a021?xsec_token=ABfb6VXJmaN67cmy85xLrfvxn2kabtGiLQnZ3m1IQdK-8=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","中草药","传统"]
@@ -3201,7 +3201,7 @@
   {
     "title": "深圳·翠华餐厅",
     "category": "饮食",
-    "coordinates": [114.02,22.54],
+    "coords": [114.02,22.54],
     "description": "著名的港式连锁茶餐厅，提供地道的港式奶茶、咖喱鱼蛋。",
     "video": "https://www.xiaohongshu.com/explore/683eb8110000000021006630?xsec_token=ABrqrV0jRvnRVRivBy4j8cEovZWjtCuggfC53pLmXVvJA=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","连锁"]
@@ -3209,7 +3209,7 @@
   {
     "title": "深圳·凤凰楼（糖水部）",
     "category": "饮食",
-    "coordinates": [113.94,22.57],
+    "coords": [113.94,22.57],
     "description": "深圳老牌酒家，其出品的广式糖水和点心广受好评。",
     "video": "https://www.xiaohongshu.com/explore/680a0129000000001d005b1c?xsec_token=ABA9wTJxXrqcnu5hZyIBZ0E7k5W_UISig8OnutIXuLQgg=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","广式"]
@@ -3217,7 +3217,7 @@
   {
     "title": "珠海·金悦轩海鲜酒家",
     "category": "饮食",
-    "coordinates": [113.56,22.22],
+    "coords": [113.56,22.22],
     "description": "珠海高档粤菜酒家，早茶精致，海鲜新鲜，当地人宴请常选。",
     "video": "https://www.xiaohongshu.com/explore/67b483f4000000000603bce7?xsec_token=AByHEuO6TIEySmUcEWE_1V60L0EhNs1WN49HQd0837icc=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","粤菜","海鲜"]
@@ -3225,7 +3225,7 @@
   {
     "title": "珠海·万福堂",
     "category": "饮食",
-    "coordinates": [113.57,22.28],
+    "coords": [113.57,22.28],
     "description": "老字号凉茶铺，提供各种保健和清热凉茶。",
     "video": "https://www.xiaohongshu.com/explore/66a0a16f000000002701cb2a?xsec_token=ABIQl6fgyf-Dz-zQgpt-QlMZMWL8waS4vKxKgOmWk4qXo=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","清热","养生"]
@@ -3233,7 +3233,7 @@
   {
     "title": "珠海·颓记茶餐厅",
     "category": "饮食",
-    "coordinates": [113.55,22.22],
+    "coords": [113.55,22.22],
     "description": "网红港式茶餐厅，性价比较高，是年轻人常去之处。",
     "video": "https://www.xiaohongshu.com/explore/6808c3f5000000000f0319a0?xsec_token=ABIr1RGD9pixk3CI0Rfxq9XHmPkG93q2jsLlkW0pCjl-c=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","实惠"]
@@ -3241,7 +3241,7 @@
   {
     "title": "珠海·紧记糖水冰室",
     "category": "饮食",
-    "coordinates": [113.30,22.20],
+    "coords": [113.30,22.20],
     "description": "主打港式特色糖水，手工制作，香甜丝滑。",
     "video": "https://www.xiaohongshu.com/explore/666ff85f000000001c0299a4?xsec_token=AB0_JHA8MAO7KRM4hZvXiyP4J-AAYAhEMz0e8DnVN-0es=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","双皮奶","顺德"]
@@ -3249,7 +3249,7 @@
   {
     "title": "佛山·得心斋",
     "category": "饮食",
-    "coordinates": [113.12,23.04],
+    "coords": [113.12,23.04],
     "description": "佛山老字号，以盲公饼和粤式点心闻名。",
     "video": "https://www.xiaohongshu.com/explore/680575db000000001c028624?xsec_token=ABxzpRI90N7aPBNMnNRmeQBKmpJYq_cE90-PNLcF2U2UQ=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","老字号"]
@@ -3257,7 +3257,7 @@
 {
     "title": "佛山·陳仔凉茶",
     "category": "饮食",
-    "coordinates": [113.23,22.96],
+    "coords": [113.23,22.96],
     "description": "佛山当地有名的凉茶店，药材地道，功效显著。",
     "video": "https://www.xiaohongshu.com/explore/68e21165000000000503a6cd?xsec_token=ABkCR6Kzc0l18MKw71pc0RRl-vOz1OoOkrvki74c2WmdA=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","地道","中药"]
@@ -3265,7 +3265,7 @@
   {
     "title": "佛山·良味新派茶餐厅",
     "category": "饮食",
-    "coordinates": [113.11,23.00],
+    "coords": [113.11,23.00],
     "description": "老牌茶餐厅，融合港式和本地口味，性价比高。",
     "video": "https://www.xiaohongshu.com/explore/68a591c2000000001d00c696?xsec_token=ABPNGyBcjhEjCb_d3j5IRJr7Alwx85L_RQXnQAmR1njXs=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","本地"]
@@ -3273,7 +3273,7 @@
   {
     "title": "佛山·辉记甜品店",
     "category": "饮食",
-    "coordinates": [113.12,23.03],
+    "coords": [113.12,23.03],
     "description": "佛山老字号糖水铺，双皮奶和芝麻糊是招牌。",
     "video": "https://www.xiaohongshu.com/explore/67b5ae31000000002903895d?xsec_token=AB0Hq3wGCedNomtfT_EcST3ZsFazg9CReeInOmVSAz1Jk=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","老字号"]
@@ -3281,7 +3281,7 @@
   {
     "title": "东莞·莞香楼",
     "category": "饮食",
-    "coordinates": [113.80,23.02],
+    "coords": [113.80,23.02],
     "description": "东莞本地风味早茶，点心种类丰富，环境具有地方特色。",
     "video": "https://www.xiaohongshu.com/explore/68352007000000000f0327b9?xsec_token=ABOQS2RVodBW43fMKmLFQksuPI-mOng-lDB_X-gMoTCbg=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","莞式","点心"]
@@ -3289,7 +3289,7 @@
   {
     "title": "东莞·杏林春",
     "category": "饮食",
-    "coordinates": [113.68,22.96],
+    "coords": [113.68,22.96],
     "description": "东莞本土凉茶品牌，口味地道，深受本地人喜爱。",
     "video": "https://www.xiaohongshu.com/explore/5fbe668b0000000001001dc6?xsec_token=ABSpIKSN3U8QZHCNEGWQA5C3_pYtGyfalp21pQ1qvIfLk=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","清热","地道"]
@@ -3297,7 +3297,7 @@
   {
     "title": "东莞·万威茶餐厅",
     "category": "饮食",
-    "coordinates": [113.83,23.00],
+    "coords": [113.83,23.00],
     "description": "港式风味浓郁，叉烧饭、冻奶茶是热门单品。",
     "video": "https://www.xiaohongshu.com/explore/65ae12f8000000002d0022cc?xsec_token=ABA0kEmCTPKD_dBaLpTmjOwB7iT7CNRBeBRaRNogrQdr4=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","快餐"]
@@ -3305,7 +3305,7 @@
   {
     "title": "东莞·永成糖水铺",
     "category": "饮食",
-    "coordinates": [113.84,23.11],
+    "coords": [113.84,23.11],
     "description": "主打本地特色糖水和甜品，椰汁西米露受欢迎。",
     "video": "https://www.xiaohongshu.com/explore/667ff333000000001f006b1b?xsec_token=ABxxlCeeGefCC_3vt18-yefj2WPk3LLa8vMeWgSq5Idv4=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","本地风味"]
@@ -3313,7 +3313,7 @@
   {
     "title": "中山·石岐佬",
     "category": "饮食",
-    "coordinates": [113.42,22.50],
+    "coords": [113.42,22.50],
     "description": "不仅有石岐乳鸽，早茶点心也极具地方特色。",
     "video": "https://www.xiaohongshu.com/explore/664f63af000000001401859f?xsec_token=ABML0XvSvI6j-qy7pAAKxfMzl6s1T2Z-_wmX8r92m1HUg=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","地方特色"]
@@ -3321,7 +3321,7 @@
   {
     "title": "中山·昆记凉茶",
     "category": "饮食",
-    "coordinates": [113.31,22.51],
+    "coords": [113.31,22.51],
     "description": "中山本地知名的凉茶店，多为传统配方。",
     "video": "https://www.xiaohongshu.com/explore/66b88424000000000d0325da?xsec_token=AB0Q0pE8ewF4-93tZ4XDFZ30JV73HT11GcZuoKRURY-S4=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","清热","中药"]
@@ -3329,7 +3329,7 @@
   {
     "title": "中山·宝塘茶楼",
     "category": "饮食",
-    "coordinates": [113.44,22.35],
+    "coords": [113.44,22.35],
     "description": "历史较久，明档老牌茶楼，是中山人共同记忆。",
     "video": "https://www.xiaohongshu.com/explore/67c6e5520000000029038b55?xsec_token=ABDddO5SXPe0SEECAmTzGsN_vVF5Yvw8OIMqQnM-I2gO0=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","老牌"]
@@ -3337,7 +3337,7 @@
 {
     "title": "中山·中恳民信（石岐店）",
     "category": "饮食",
-    "coordinates": [113.38,22.53],
+    "coords": [113.38,22.53],
     "description": "姜撞奶、双皮奶非常有名，是顺德甜品的代表。",
     "video": "https://www.xiaohongshu.com/explore/67498ea6000000000202a349?xsec_token=ABmzgG-ttqMBNRQyXyEeZRsEReaKyFd9RAqZ1PyJ2BKZs=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","双皮奶","顺德"]
@@ -3345,7 +3345,7 @@
   {
     "title": "江门·石湾点心",
     "category": "饮食",
-    "coordinates": [113.09,22.58],
+    "coords": [113.09,22.58],
     "description": "纯手工自选早茶，地方风味浓郁。",
     "video": "https://www.xiaohongshu.com/explore/6666bde1000000000e033e22?xsec_token=ABoWjTPp3GcX_X0vdgwKCJJxTRAx09tYYzWR_MIBrdtmI=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","粤菜"]
@@ -3353,7 +3353,7 @@
   {
     "title": "江门·粤囍车仔面",
     "category": "饮食",
-    "coordinates": [113.10,22.59],
+    "coords": [113.10,22.59],
     "description": "具有老式情怀的茶餐厅，牛腩面和奶茶经典。",
     "video": "https://www.xiaohongshu.com/explore/685cf87a000000000b02dc32?xsec_token=ABiopLiBRmvZUWwigiH4z7y53-Noacz6GYjExoQSz5EFk=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","老店"]
@@ -3361,7 +3361,7 @@
   {
     "title": "江门·甜品宝贝糖水店",
     "category": "饮食",
-    "coordinates": [112.69,22.37],
+    "coords": [112.69,22.37],
     "description": "开业多年，传统广式糖水为主，深受本地人喜爱。",
     "video": "https://www.xiaohongshu.com/explore/67b60187000000002803de11?xsec_token=ABVcOI1pRqxN9tbPF8olxhKP5jPRMJzzGUq8hsbuB1LXs=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","老字号"]
@@ -3369,7 +3369,7 @@
   {
     "title": "惠州·天悦酒店",
     "category": "饮食",
-    "coordinates": [114.40,23.07],
+    "coords": [114.40,23.07],
     "description": "惠州老字号酒楼，早茶点心注重本地特色和创新。",
     "video": "https://www.xiaohongshu.com/explore/68824e6e00000000100254a7?xsec_token=ABDA3VcCseuhev-8nHPmrs-dc9f5gY_SwesKUs0V0hNTA=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","本地风味"]
@@ -3377,7 +3377,7 @@
   {
     "title": "惠州·顶峰香港茶餐厅",
     "category": "饮食",
-    "coordinates": [114.44,23.06],
+    "coords": [114.44,23.06],
     "description": "传承香港美食，提供多样港式餐点。",
     "video": "https://www.xiaohongshu.com/explore/67b2d696000000001800a52e?xsec_token=ABWeXnimdpW9gnaLk1bh_-6ZpV_aFBl_4_utF1G8oKFgQ=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","连锁"]
@@ -3385,7 +3385,7 @@
   {
     "title": "惠州·蘭亭叙甜食馆",
     "category": "饮食",
-    "coordinates": [114.39,23.11],
+    "coords": [114.39,23.11],
     "description": "靠近西湖，环境清雅，糖水品类多样，芋圆和芝麻糊受欢迎。",
     "video": "https://www.xiaohongshu.com/explore/6773b9b1000000001300aca1?xsec_token=ABS5aT1mpNUu8U_azlVCQyYwW_0-E2ALKXWoTId1pPRxE=&xsec_source=pc_user",
     "tags": ["糖水","甜品","休闲"]
@@ -3393,7 +3393,7 @@
   {
     "title": "肇庆·文苑楼",
     "category": "饮食",
-    "coordinates": [112.42,23.07],
+    "coords": [112.42,23.07],
     "description": "肇庆老牌早茶点心传统，环境古朴。",
     "video": "https://www.xiaohongshu.com/explore/68d20829000000000e00fff1?xsec_token=AB7hbzozxXgndJ77exFnQxNgSpXKH-Rxz8Z4onMEUyUqM=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","传统"]
@@ -3401,7 +3401,7 @@
   {
     "title": "肇庆·行运大排档",
     "category": "饮食",
-    "coordinates": [111.78,23.14],
+    "coords": [111.78,23.14],
     "description": "肇庆市区茶餐厅，提供平价港式快餐。",
     "video": "https://www.xiaohongshu.com/explore/66fb863f000000002c015c03?xsec_token=ABmqGphaKbhGAR4zm9NhUMa6hgmGLyqXnIId40EFovcEk=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","快餐"]
@@ -3409,7 +3409,7 @@
   {
     "title": "肇庆·双雪甜品",
     "category": "饮食",
-    "coordinates": [112.50,23.07],
+    "coords": [112.50,23.07],
     "description": "主打广式糖水，双皮奶、芋头西米露经典。",
     "video": "https://www.xiaohongshu.com/explore/6875316c0000000017036adc?xsec_token=ABhFfO0j24cT4mMnf4cbDCGUCw6UcXX21FYAqCNO4SpUU=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","广式"]
@@ -3417,7 +3417,7 @@
   {
     "title": "汕头·行运龙凤茶楼",
     "category": "饮食",
-    "coordinates": [116.74,23.37],
+    "coords": [116.74,23.37],
     "description": "潮汕全手工茶楼。",
     "video": "https://www.xiaohongshu.com/explore/68b8f694000000001d00444d?xsec_token=ABGeILmr4zbYi1Y3AGRHSfoLLViD5FrzkkBjzeWMzEPcA=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","肠粉","潮汕"]
@@ -3425,7 +3425,7 @@
   {
     "title": "汕头·四顺凉茶",
     "category": "饮食",
-    "coordinates": [116.77,23.46],
+    "coords": [116.77,23.46],
     "description": "潮汕地区的传统凉茶铺，配方有别于广府。",
     "video": "https://www.xiaohongshu.com/explore/6704fdff000000002c02f3b9?xsec_token=AB6E24YpPvaJFHjeTtfhBLfFVS57gmlsJXiJoZe-_1kfk=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","潮汕","地道"]
@@ -3433,7 +3433,7 @@
   {
     "title": "汕头·滙翠茶餐厅",
     "category": "饮食",
-    "coordinates": [116.76,23.47],
+    "coords": [116.76,23.47],
     "description": "潮汕地区融合港式和本土口味的餐厅。",
     "video": "https://www.xiaohongshu.com/explore/650753030000000013036a13?xsec_token=ABwAAtk_FB_BHa0NrVgPNH-7g9-U8D7xth8DUaPzr62JM=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","潮汕","融合"]
@@ -3441,7 +3441,7 @@
   {
     "title": "汕头·老妈宫粽球&糖水",
     "category": "饮食",
-    "coordinates": [116.68,23.35],
+    "coords": [116.68,23.35],
     "description": "潮汕老字号，各式传统潮汕糖水也是特色。",
     "video": "https://www.xiaohongshu.com/explore/67ac211e0000000029028d7a?xsec_token=ABP6pizuyynqD5DdvUpgcZV-M-mn2TI4Ni-ZiiUVGiKgM=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","潮汕","甜品"]
@@ -3449,7 +3449,7 @@
   {
     "title": "潮州·韩上楼大酒楼",
     "category": "饮食",
-    "coordinates": [116.65,23.65],
+    "coords": [116.65,23.65],
     "description": "潮州酒楼饮推车早茶",
     "video": "https://www.xiaohongshu.com/explore/66fb9a6e000000001a022bc4?xsec_token=ABmqGphaKbhGAR4zm9NhUMa0b7bJufjuQ0lUwXC7P5_gM=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","潮汕","牛肉"]
@@ -3457,7 +3457,7 @@
   {
     "title": "潮州·拾号冰室",
     "category": "饮食",
-    "coordinates": [116.65,23.69],
+    "coords": [116.65,23.69],
     "description": "暖乎乎的姜薯汤，料多到一碗就饱啦。",
     "video": "https://www.xiaohongshu.com/explore/64b56aa00000000035008652?xsec_token=ABYU6-gXtiwIor4dTnlZW3K3nbwNqtXAmx0yAsq-YubNw=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","潮汕","老字号"]
@@ -3465,7 +3465,7 @@
 {
     "title": "揭阳·揭阳迎宾馆（早茶）",
     "category": "饮食",
-    "coordinates": [116.37,23.57],
+    "coords": [116.37,23.57],
     "description": "揭阳规模较大的酒楼，提供传统粤式早茶。",
     "video": "https://www.xiaohongshu.com/explore/6107458e0000000021036b68?xsec_token=ABs49hDyGKDIBpMwyHxW5itMLbkwtL_1cB3yRO6kV8iRg=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","粤菜"]
@@ -3473,7 +3473,7 @@
   {
     "title": "揭阳·洪信美古城冰室",
     "category": "饮食",
-    "coordinates": [116.36,23.54],
+    "coords": [116.36,23.54],
     "description": "结合潮汕和港式风格的冰室。",
     "video": "https://www.xiaohongshu.com/explore/66471f200000000015011869?xsec_token=ABUIlZRV4Vb6NINpOQw6ozGwT6rwx9eEDRSJeR-dFzLhQ=&xsec_source=pc_search&source=unknown",
     "tags": ["冰室","潮汕","快餐"]
@@ -3481,7 +3481,7 @@
   {
     "title": "揭阳·勇记甜汤",
     "category": "饮食",
-    "coordinates": [116.26,23.28],
+    "coords": [116.26,23.28],
     "description": "揭阳12种甜汤，清热解暑，料足味美。",
     "video": "https://www.xiaohongshu.com/explore/68a1a1cd000000001d00e118?xsec_token=ABTcuOzKhMkja3--ugC_l7OVJdTZtwjagf42tQW9ufxpI=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜汤","潮汕"]
@@ -3489,7 +3489,7 @@
   {
     "title": "湛江·溢香酒楼（万豪店）",
     "category": "饮食",
-    "coordinates": [110.41,21.22],
+    "coords": [110.41,21.22],
     "description": "湛江本地老牌酒楼，早茶海鲜点心是特色。",
     "video": "https://www.xiaohongshu.com/explore/685fb2960000000017036c2a?xsec_token=ABVmKalnl1bq0i5HZSAiabZjWAT8rjHwxNVBhHtO0WCbc=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","海鲜","粤菜"]
@@ -3497,7 +3497,7 @@
   {
     "title": "湛江·龟老板凉茶世家",
     "category": "饮食",
-    "coordinates": [110.37,21.27],
+    "coords": [110.37,21.27],
     "description": "湛江常见连锁凉茶品牌，提供不同功效的凉茶。",
     "video": "https://www.xiaohongshu.com/explore/6495a8f20000000011012daa?xsec_token=AB_widDIDo_DKUfdV03b57SVGxQnG7BpAvi4KxTFe1woU=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","清热","连锁"]
@@ -3505,7 +3505,7 @@
   {
     "title": "湛江·张杨食屋",
     "category": "饮食",
-    "coordinates": [110.42,21.21],
+    "coords": [110.42,21.21],
     "description": "主打港式简餐，口味地道。",
     "video": "https://www.xiaohongshu.com/explore/66bcd5f0000000001e01a9f8?xsec_token=AB2-teYbvI0WnfvTWz4gRe5tLBiGCzOPC5UKjxcpL9XkA=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","快餐"]
@@ -3513,7 +3513,7 @@
   {
     "title": "湛江·黎耀阳财神糖水铺(霞山店)",
     "category": "饮食",
-    "coordinates": [110.40,21.19],
+    "coords": [110.40,21.19],
     "description": "藏在老巷子里的传统糖水铺，糖水品种丰富。",
     "video": "https://www.xiaohongshu.com/explore/6644daf9000000001e020649?xsec_token=ABW92pw9WMOogVlO8CQH3RKUyx8LcquDw_eLJAHgErq7c=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","老店"]
@@ -3521,7 +3521,7 @@
   {
     "title": "茂名·茂名威利国际酒店",
     "category": "饮食",
-    "coordinates": [110.93,21.65],
+    "coords": [110.93,21.65],
     "description": "茂名地区知名的粤菜酒楼，早茶点心传统。",
     "video": "https://www.xiaohongshu.com/explore/678c896c000000001d0132b5?xsec_token=ABHh6FWHAkDGyh9tyhBRQhx7bNDMzhEZBi3DqS44aolRc=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","粤菜"]
@@ -3529,7 +3529,7 @@
   {
     "title": "茂名·雷公凉茶",
     "category": "饮食",
-    "coordinates": [110.92,21.67],
+    "coords": [110.92,21.67],
     "description": "茂名街头传统草药凉茶铺，当地人习惯日常饮用。",
     "video": "https://www.xiaohongshu.com/explore/638d8d04000000001f02020f?xsec_token=ABwndyKY0Mw1zDznXIFWs20fA3tI4m5cimE4Ej5BNmIyg=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","中草药","地道"]
@@ -3537,7 +3537,7 @@
   {
     "title": "茂名·肥姨糖水",
     "category": "饮食",
-    "coordinates": [110.66,21.64],
+    "coords": [110.66,21.64],
     "description": "茂名电白地区的特色糖水店，种类多，口味独特。",
     "video": "https://www.xiaohongshu.com/explore/6865ebba0000000012022d10?xsec_token=ABMpYlJIVH3ZRtfP_edHJBGXlF-xJP11V90UvC61BJ66k=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","本地特色"]
@@ -3545,7 +3545,7 @@
   {
     "title": "阳江·正斗渔邨",
     "category": "饮食",
-    "coordinates": [111.84,21.57],
+    "coords": [111.84,21.57],
     "description": "阳江本地人常去的酒家，早茶点心海鲜风味突出。",
     "video": "https://www.xiaohongshu.com/explore/68b98938000000001b0364de?xsec_token=ABJ21Ki8seZEKccsdEGwkw3J_1yqT3DfaGc-G7Ll16cWI=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","海鲜","地方风味"]
@@ -3553,7 +3553,7 @@
   {
     "title": "阳江·渔夫培记茶餐厅",
     "category": "饮食",
-    "coordinates": [111.96,21.87],
+    "coords": [111.96,21.87],
     "description": "阳江市区内的港式茶餐厅，提供简餐。",
     "video": "https://www.xiaohongshu.com/explore/687f07f60000000017030a3f?xsec_token=ABf4jcMtydl_aXTOS3XEq-YJs66Y6S-7WMvTNwBArYIOc=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","简餐"]
@@ -3561,7 +3561,7 @@
   {
     "title": "阳江·松记砂煲糖水",
     "category": "饮食",
-    "coordinates": [111.98,21.84],
+    "coords": [111.98,21.84],
     "description": "阳江传统糖水铺，木瓜冲蛋、芋圆等受欢迎。",
     "video": "https://www.xiaohongshu.com/explore/68a46bbd000000001c030bae?xsec_token=ABHoM9CW5lggn7n6UD8XJEhCLX_smpWgqzQZeQub1w0tY=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","地方特色"]
@@ -3569,7 +3569,7 @@
   {
     "title": "韶关·早茶茶楼本岛",
     "category": "饮食",
-    "coordinates": [113.53,24.76],
+    "coords": [113.53,24.76],
     "description": "二十年老字号茶楼，早茶推车是韶关人共同的童年记忆。",
     "video": "http://xhslink.com/o/iO30EAOGCe",
     "tags": ["早茶","点心","本地风味"]
@@ -3577,7 +3577,7 @@
   {
     "title": "韶关·四福堂凉茶",
     "category": "饮食",
-    "coordinates": [113.60,24.81],
+    "coords": [113.60,24.81],
     "description": "结合粤北地区气候和药材特点的凉茶铺。",
     "video": "https://www.xiaohongshu.com/explore/67554f9b000000000603c262?xsec_token=ABUD_Q1XqUMwSn5JpBA31JZ5Tbrhs964PEbCE5THXKuIA=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","中草药","粤北"]
@@ -3585,7 +3585,7 @@
   {
     "title": "韶关·文记茶餐厅",
     "category": "饮食",
-    "coordinates": [113.58,24.80],
+    "coords": [113.58,24.80],
     "description": "韶关冰室，融合西式和港式餐点。",
     "video": "https://www.xiaohongshu.com/explore/68061e42000000001b02794e?xsec_token=AB1l6po6Aku9skK2HQWngIlKDUJpz-8h-vzpmVy1HeHys=&xsec_source=pc_search&source=unknown",
     "tags": ["冰室","港式","老店"]
@@ -3593,7 +3593,7 @@
   {
     "title": "韶关·天添甜甜品店",
     "category": "饮食",
-    "coordinates": [113.60,24.81],
+    "coords": [113.60,24.81],
     "description": "主打广式糖水，杨枝甘露是招牌。",
     "video": "https://www.xiaohongshu.com/explore/67f7a4f7000000000b015fc9?xsec_token=AB0FMka-cvTWDSsldE4xRs6-vD9VA57KaOgyzbOVdFNlY=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","广式"]
@@ -3601,7 +3601,7 @@
   {
     "title": "梅州·老二大饺烧卖腌粉",
     "category": "饮食",
-    "coordinates": [116.11,24.30],
+    "coords": [116.11,24.30],
     "description": "梅州腌面。",
     "video": "https://www.xiaohongshu.com/explore/67f223b7000000001c01f549?xsec_token=ABxEvXGb7YOYcd8c6TY9vdJrgiw4Mzy2PeqTymBAH8IxA=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","客家","粤菜"]
@@ -3609,7 +3609,7 @@
   {
     "title": "梅州·庆梅仙人粄",
     "category": "饮食",
-    "coordinates": [116.11,24.31],
+    "coords": [116.11,24.31],
     "description": "客家人自制仙草，具有地方特色。",
     "video": "https://www.xiaohongshu.com/explore/6865079900000000220328ac?xsec_token=ABMpYlJIVH3ZRtfP_edHJBGUVg6U_BCGXnpIHjxag57tA=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","客家","地道"]
@@ -3617,7 +3617,7 @@
   {
     "title": "梅州·顺发茶餐厅",
     "category": "饮食",
-    "coordinates": [116.13,24.26],
+    "coords": [116.13,24.26],
     "description": "带有客家特色的港式冰室。",
     "video": "https://www.xiaohongshu.com/explore/683f961a0000000023000354?xsec_token=ABCPOd1_ppsrtwgA8BBVa0yFrxLn2qundcbUxrCv6sen4=&xsec_source=pc_search&source=unknown",
     "tags": ["冰室","客家","快餐"]
@@ -3625,7 +3625,7 @@
   {
     "title": "梅州·洪屋雪花冰室",
     "category": "饮食",
-    "coordinates": [116.11,24.31],
+    "coords": [116.11,24.31],
     "description": "主打冰沙甜品和糖水。",
     "video": "https://www.xiaohongshu.com/explore/65c47b9d000000001100cc42?xsec_token=ABF4veQH_e_oC0cKsjHLYCD1i5piUeKgXJzbKqBsdtrp4=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","客家","甜品"]
@@ -3633,7 +3633,7 @@
   {
     "title": "河源·金沙湾食府",
     "category": "饮食",
-    "coordinates": [114.70,23.73],
+    "coords": [114.70,23.73],
     "description": "河源地区知名的客家粤菜酒楼，早茶点心精致。",
     "video": "https://www.xiaohongshu.com/explore/6299b949000000002103b797?xsec_token=ABTxq1FlBFOQI1iU8rGWlsSx1TramvRcIur_nNJUxCYh8=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","客家","粤菜"]
@@ -3641,7 +3641,7 @@
   {
     "title": "河源·丰彩甜品",
     "category": "饮食",
-    "coordinates": [114.71,23.75],
+    "coords": [114.71,23.75],
     "description": "提供传统客家和广式糖水。",
     "video": "https://www.xiaohongshu.com/explore/6703661e000000001902e735?xsec_token=ABu54OWo_Q3YSn9gxsQeraW9eRmGPLIqG-Jyl1HHJum9U=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","客家"]
@@ -3649,7 +3649,7 @@
   {
     "title": "清远·清远迎宾馆",
     "category": "饮食",
-    "coordinates": [113.06,23.68],
+    "coords": [113.06,23.68],
     "description": "清远规模较大的酒楼，提供传统粤式早茶。",
     "video": "https://www.xiaohongshu.com/explore/66cd2b3a000000001f016402?xsec_token=ABq5i2T9rT5a7OAxYIOmP2xDASfYjZV5Pgvm5l9QojyUw=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","粤菜"]
@@ -3657,7 +3657,7 @@
   {
     "title": "清远·达生香港茶餐厅",
     "category": "饮食",
-    "coordinates": [113.07,23.67],
+    "coords": [113.07,23.67],
     "description": "清远的港式冰室。",
     "video": "https://www.xiaohongshu.com/explore/674190ec0000000002029278?xsec_token=AB6NSWcqeluBvb2peDcXMQRXATz1Ru--XKeGrs_uSWPJU=&xsec_source=pc_search&source=unknown",
     "tags": ["冰室","港式","快餐"]
@@ -3665,7 +3665,7 @@
   {
     "title": "清远·仓钱街糖水店",
     "category": "饮食",
-    "coordinates": [113.03,23.71],
+    "coords": [113.03,23.71],
     "description": "市级非遗糖水店铺，传承五代，将手艺传承下去。",
     "video": "https://www.xiaohongshu.com/explore/659fa6a8000000001c013c4c?xsec_token=ABeHdTgmI8Wdf9LAwZVPdtQoLveZutY7vM4nha6BDOy8Q=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","地方特色"]
@@ -3673,7 +3673,7 @@
   {
     "title": "云浮·太平好姐饮食店",
     "category": "饮食",
-    "coordinates": [112.26,22.64],
+    "coords": [112.26,22.64],
     "description": "云浮本地人常去的街边餐档，早茶点心传统。",
     "video": "https://www.xiaohongshu.com/explore/665b071a00000000160115fc?xsec_token=ABQGeYdB3joVG7HFBHTbXBP3ZcISo0igLfcxC880B8zuk=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","粤菜"]
@@ -3681,7 +3681,7 @@
   {
     "title": "云浮·开龙雀冰室",
     "category": "饮食",
-    "coordinates": [112.02,22.92],
+    "coords": [112.02,22.92],
     "description": "云浮市区的港式冰室。",
     "video": "https://www.xiaohongshu.com/explore/66c0861c000000000d030c40?xsec_token=ABp2bZjwxQ-M3obVwfg2Th9oRy8YdnYMUgzwTgFH8Onrk=&xsec_source=pc_search&source=unknown",
     "tags": ["冰室","港式","简餐"]
@@ -3689,7 +3689,7 @@
   {
     "title": "云浮·雪花甜品店",
     "category": "饮食",
-    "coordinates": [112.04,22.93],
+    "coords": [112.04,22.93],
     "description": "传统广式和本地糖水，如芝麻糊、花生糊。",
     "video": "https://www.xiaohongshu.com/explore/66e40c62000000001201109b?xsec_token=ABykId-p-PjZtZS--SO9_eIpC4oVtavojyoAhc17m-jW0=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","老字号"]
@@ -3697,7 +3697,7 @@
   {
     "title": "香港·莲香楼（中环）",
     "category": "饮食",
-    "coordinates": [114.16,22.28],
+    "coords": [114.16,22.28],
     "description": "极具老香港风情的茶楼，点心推车传统，充满怀旧感。",
     "video": "https://www.xiaohongshu.com/explore/687b1499000000002201ec68?xsec_token=ABGugVAXxw1ctHtFUJhKIwEtWueKJXrwPimyCsJnWH2MY=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","老字号"]
@@ -3705,7 +3705,7 @@
   {
     "title": "香港·恭和堂凉茶",
     "category": "饮食",
-    "coordinates": [114.18,22.32],
+    "coords": [114.18,22.32],
     "description": "香港著名凉茶连锁店，龟苓膏和二十四味凉茶出名。",
     "video": "https://www.xiaohongshu.com/explore/65e1b530000000000102a75a?xsec_token=ABYx8Hx-LUMufddOteMVY-hotUGsuUAL7-9lQaa3SE7R8=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","龟苓膏","清热"]
@@ -3713,7 +3713,7 @@
   {
     "title": "香港·兰芳园（中环总店）",
     "category": "饮食",
-    "coordinates": [114.16,22.28],
+    "coords": [114.16,22.28],
     "description": "丝袜奶茶发源地，历史悠久，是港式茶餐代表。",
     "video": "https://www.xiaohongshu.com/explore/68638efa000000001002769a?xsec_token=ABaKoAj2Q2xte5XnquOzotvUyBMLnQub_RtU5wz4SHb-A=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","奶茶"]
@@ -3721,7 +3721,7 @@
   {
     "title": "香港·发记甜品",
     "category": "饮食",
-    "coordinates": [114.18,22.30],
+    "coords": [114.18,22.30],
     "description": "香港连锁甜品店，以榴莲甜品和芒果系列闻名。",
     "video": "https://www.xiaohongshu.com/explore/5ec7a2a5000000000101ed09?xsec_token=AB2vX8tB6I7dldedQovKfLj17GmlPS04IYag3S4401NZ4=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","连锁"]
@@ -3729,7 +3729,7 @@
   {
     "title": "澳门·龙华茶楼",
     "category": "饮食",
-    "coordinates": [113.55,22.20],
+    "coords": [113.55,22.20],
     "description": "澳门仅存的古老茶楼之一，环境怀旧，推车点心。",
     "video": "https://www.xiaohongshu.com/explore/65991f1d0000000012006a4b?xsec_token=AB4ouAAHgUDicCJQhdn_FRtpHFNC2674ae2csbNDg26qY=&xsec_source=pc_search&source=unknown",
     "tags": ["早茶","点心","老字号"]
@@ -3737,7 +3737,7 @@
   {
     "title": "澳门·余保和凉茶世家(氹仔店)",
     "category": "饮食",
-    "coordinates": [113.56,22.16],
+    "coords": [113.56,22.16],
     "description": "澳门百年历史传统凉茶店，售卖各种祛湿清热茶饮。",
     "video": "https://www.xiaohongshu.com/explore/668213dc000000001c0213c8?xsec_token=ABqIDHfroo-IG9Dn_tclEyL2sHH2kGyBITbdB8YQXbbjM=&xsec_source=pc_search&source=unknown",
     "tags": ["凉茶","清热","地道"]
@@ -3745,7 +3745,7 @@
   {
     "title": "澳门·义顺牛奶公司",
     "category": "饮食",
-    "coordinates": [113.54,22.19],
+    "coords": [113.54,22.19],
     "description": "澳门老字号，以双皮奶、姜汁撞奶和猪扒包闻名。",
     "video": "https://www.xiaohongshu.com/explore/68386943000000002001c43b?xsec_token=ABet2wXF1PhX0hYHwPNiQyLXFyoIZwL3Thy7ve-qpmx8M=&xsec_source=pc_search&source=unknown",
     "tags": ["冰室","港式","双皮奶"]
@@ -3753,7 +3753,7 @@
   {
     "title": "澳门·莫义记大菜糕",
     "category": "饮食",
-    "coordinates": [113.56,22.15],
+    "coords": [113.56,22.15],
     "description": "澳门特色大菜糕（海藻冻）和榴莲雪糕。",
     "video": "https://www.xiaohongshu.com/explore/66fa9428000000002a036a65?xsec_token=AB3Ol0vYOe365lqKEtoce5qPegKWOd1hsgYZCelK9OcGE=&xsec_source=pc_search&source=unknown",
     "tags": ["糖水","甜品","澳门特色"]
@@ -3761,7 +3761,7 @@
   {
     "title": "澳门·百乐门粉面店",
     "category": "饮食",
-    "coordinates": [113.55,22.21],
+    "coords": [113.55,22.21],
     "description": "专注传统面食制作，店内怀旧，充满本土茶餐厅味道。",
     "video": "https://www.xiaohongshu.com/explore/668125cf000000001e010be5?xsec_token=AB-Rt5eMN5vQ6r8WEmfTl1gZFQOutELg4yUhZZ3TkHmTM=&xsec_source=pc_search&source=unknown",
     "tags": ["茶餐厅","港式","面食"]
