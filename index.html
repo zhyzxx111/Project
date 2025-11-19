@@ -28,22 +28,6 @@
     .legend { display:flex; gap:8px; flex-wrap:wrap; margin-top: 6px; }
     .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb22; }
     .video-wrapper iframe { position: absolute; width: 100%; height: 100%; left:0; top:0; border:0; }
-    .popup h3 { margin: 0 0 6px; font-size: 16px; }
-    .popup p { margin: 0 0 8px; font-size: 13px; color:#cbd5e1; }
-
-    .cmt-wrap { margin-top:10px; }
-    .cmt-title { font-weight:700; margin:6px 0 8px; }
-    .cmt-list { display:flex; flex-direction:column; gap:8px; max-height:210px; overflow:auto; }
-    .cmt-item { background:#0f172a; border:1px solid #1f2937; border-radius:10px; padding:8px; }
-    .cmt-meta { font-size:12px; color:#94a3b8; margin-bottom:4px; display:flex; justify-content:space-between; gap:8px; }
-    .cmt-text { font-size:13px; color:#e5e7eb; white-space:pre-wrap; }
-    .cmt-imgs { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
-    .cmt-imgs img { max-width:120px; max-height:90px; border-radius:8px; border:1px solid #334155; }
-    .cmt-form { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
-    .cmt-form input[type="text"], .cmt-form textarea { width:100%; padding:8px 10px; border:1px solid #374151; background:#0b1220; color:#e5e7eb; border-radius:10px; font-size:13px; }
-    .cmt-actions { display:flex; gap:8px; align-items:center; }
-    .cmt-btn { padding:8px 10px; border:1px solid #374151; background:#0b1220; color:#e5e7eb; border-radius:10px; font-size:12px; cursor:pointer; }
-    .cmt-btn.primary { border-color:#22c55e; }
 
     #burger{position:absolute;z-index:1000;top:12px;left:12px;background:#111827;color:#e5e7eb;border:1px solid #1f2937;padding:8px 10px;border-radius:10px;display:none;}
     @media (max-width:900px){
@@ -54,6 +38,7 @@
     }
   </style>
 </head>
+
 <body>
   <div id="app">
     <aside id="sidebar">
@@ -78,11 +63,9 @@
       </fieldset>
 
       <fieldset>
-        <legend>流动路径</legend>
-        <div class="control-row">
-          <label><input type="checkbox" id="chkFlows" checked> 显示流动路径</label>
-          <button id="btnReplayFlows" class="btn">重新播放</button>
-        </div>
+        <legend>流动路径（可单独开关）</legend>
+        <div id="flowList" class="control-row" style="flex-direction:column; align-items:flex-start;"></div>
+        <button id="btnReplayFlows" class="btn">重新播放</button>
       </fieldset>
 
       <div class="legend" id="legend"></div>
@@ -95,327 +78,102 @@
 
   <script>
     const SB_URL = 'https://dddgcpltndyfxlnaftnd.supabase.co';
-    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRkZGdjcGx0bmR5ZnhsbmFmdG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxODYyMTcsImV4cCI6MjA3NTc2MjIxN30.RrD1PQppROWTnCgkY16gRvBGbmrLLMRwCMlRBdITeUw';
-
-    async function getComments(placeId) {
-      const url = `${SB_URL}/rest/v1/comments?select=nick,text,imgs,created_at&place_id=eq.${encodeURIComponent(placeId)}&order=created_at.desc`;
-      const res = await fetch(url, {
-        headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` }
-      });
-      if (!res.ok) throw new Error('fetch error ' + res.status);
-      return await res.json();
-    }
-
-    async function addComment({ placeId, nick, text, imgs }) {
-      const res = await fetch(`${SB_URL}/rest/v1/comments`, { 
-        method: 'POST',
-        headers: {
-          apikey: SB_KEY,
-          Authorization: `Bearer ${SB_KEY}`,
-          'Content-Type': 'application/json',
-          Prefer: 'return=minimal'
-        },
-        body: JSON.stringify({ place_id: placeId, nick, text, imgs })
-      });
-      if (!res.ok) throw new Error('insert error ' + res.status);
-    }
+    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
 
     const iconMap = { '饮食':'🍜', '节庆':'🎎', '语言':'🈶', '生活方式':'🏙️', '非遗艺术':'🪭', '建筑记忆':'🏯' };
     const escapeHTML = (s='') => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    
+    const flowLayers = [];
+    let flowAnimRunning = false;
 
-    /* ======= 新增：YouTube 优雅降级工具 ======= */
-    function ytParseId(input='') {
-      const s = String(input).trim();
-      return (
-        s.match(/youtu\.be\/([^?&#/]+)/)?.[1] ||
-        s.match(/[?&#]v=([^?&#/]+)/)?.[1] ||
-        s.match(/\/shorts\/([^?&#/]+)/)?.[1] ||
-        (s.length === 11 ? s : null)
-      );
-    }
-    function ytEmbedUrl(id) {
-      return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1&origin=${encodeURIComponent(location.origin)}`;
-    }
-    function ytWatchUrl(id) { return `https://www.youtube.com/watch?v=${id}`; }
-    function ytThumb(id) { return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
-
-    function renderYouTubeGracefully(container, input) {
-      const id = ytParseId(input);
-      if (!id) {
-        // 非 YouTube：走原生 iframe
-        const iframe = document.createElement('iframe');
-        iframe.loading = 'lazy';
-        iframe.src = input;
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-        iframe.allowFullscreen = true;
-        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-        // 包一层以应用 16:9 样式
-        const wrap = document.createElement('div');
-        wrap.className = 'video-wrapper';
-        wrap.appendChild(iframe);
-        container.appendChild(wrap);
-        return;
-      }
-
-      // 1) 缩略图 + 外链（始终可用）
-      const fallback = document.createElement('a');
-      fallback.href = ytWatchUrl(id);
-      fallback.target = '_blank';
-      fallback.rel = 'noopener noreferrer';
-      fallback.style.display = 'block';
-      fallback.style.position = 'relative';
-      fallback.style.borderRadius = '12px';
-      fallback.style.overflow = 'hidden';
-      fallback.innerHTML = `
-        <img src="${ytThumb(id)}" alt="YouTube thumbnail" style="width:100%;display:block">
-        <span style="position:absolute;inset:0;display:grid;place-items:center">
-          <button style="padding:8px 12px;border:none;border-radius:999px;background:#0009;color:#fff">
-            在 YouTube 打开
-          </button>
-        </span>
-      `;
-      container.appendChild(fallback);
-
-      // 2) 试图内嵌 iframe
-      const iframe = document.createElement('iframe');
-      iframe.loading = 'lazy';
-      iframe.src = ytEmbedUrl(id);
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-      iframe.allowFullscreen = true;
-      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-
-      const wrap = document.createElement('div');
-      wrap.className = 'video-wrapper';
-      wrap.appendChild(iframe);
-
-      container.replaceChild(wrap, fallback);
-
-      // 3) 超时降级（153/地区/策略拦截）
-      const timeout = setTimeout(() => {
-        if (container.contains(wrap)) {
-          container.replaceChild(fallback, wrap);
-        }
-      }, 1800);
-
-      iframe.addEventListener('load', () => clearTimeout(timeout));
-    }
-    /* ======= 优雅降级工具结束 ======= */
-
-    function emojiIcon(e){return L.divIcon({html:`<div style="font-size:20px">${e}</div>`,className:'emoji-icon',iconSize:[24,24],iconAnchor:[12,24],popupAnchor:[0,-20]});}
-    function placeId(p){ const base=(p.title||'')+'|'+(Array.isArray(p.coords)?p.coords.join(','):''); let h=0; for(let i=0;i<base.length;i++){ h=((h<<5)-h)+base.charCodeAt(i); h|=0; } return 'p'+(h>>>0); }
-
-    async function compressImage(file, maxSide=1024, quality=0.8){
-      const img = await new Promise((res, rej)=>{ const url=URL.createObjectURL(file); const i=new Image(); i.onload=()=>{res(i);URL.revokeObjectURL(url);}; i.onerror=rej; i.src=url; });
-      const w=img.width, h=img.height; let tw=w, th=h;
-      if(Math.max(w,h)>maxSide){ if(w>h){ tw=maxSide; th=Math.round(h*maxSide/w);} else{ th=maxSide; tw=Math.round(w*maxSide/h);} }
-      const canvas=document.createElement('canvas'); canvas.width=tw; canvas.height=th; const ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,tw,th);
-      return canvas.toDataURL('image/jpeg', quality);
-    }
-
-    const submitCooldown = new Map();
-    function canSubmit(cid){
-      const now = Date.now();
-      const last = submitCooldown.get(cid) || 0;
-      if (now - last < 10000) return false;
-      submitCooldown.set(cid, now);
-      return true;
-    }
-
-    const map = L.map('map', { center:[22.9,113.5], zoom:9, minZoom:3, worldCopyJump:true });
-    const baseLayers = {
-      "Light": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution:'&copy; OpenStreetMap & CARTO' }).addTo(map),
-      "Outdoors": L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution:'&copy; OpenTopoMap' })
-    };
-    L.control.layers(baseLayers, null, { position:'topleft', collapsed:true }).addTo(map);
-
-    const layerGroups = new Map();
-    const placesState = { places: [], categories: new Set() };
-
-    function renderCategoryControls(){
-      const c=document.getElementById('catContainer');const l=document.getElementById('legend');c.innerHTML='';l.innerHTML='';
-      [...placesState.categories].forEach(cat=>{
-        const id=`cat_${cat}`;const label=document.createElement('label');
-        label.innerHTML=`<input type="checkbox" class="cat-check" id="${id}" value="${escapeHTML(cat)}" checked> ${escapeHTML(cat)}`;
-        c.appendChild(label);const chip=document.createElement('div');
-        chip.className='chip';chip.innerHTML=`<span>${iconMap[cat]||'📍'}</span>${escapeHTML(cat)}`;l.appendChild(chip);
+    function clearFlows() {
+      flowLayers.forEach(o=>{
+        if(o.polyline) map.removeLayer(o.polyline);
+        if(o.dot) map.removeLayer(o.dot);
       });
-      c.querySelectorAll('.cat-check').forEach(e=>e.addEventListener('change',applyFilter));
+      flowLayers.length = 0;
     }
 
-    function buildPopupDOM(p){
-      const wrap=document.createElement('div'); wrap.className='popup';
-      const h3=document.createElement('h3'); h3.textContent=p.title||''; wrap.appendChild(h3);
-      const desc=document.createElement('p'); desc.textContent=p.description||''; wrap.appendChild(desc);
-
-      // ===== 使用优雅降级渲染视频 =====
-      if (p.video) {
-        const vbox = document.createElement('div');
-        renderYouTubeGracefully(vbox, p.video);
-        wrap.appendChild(vbox);
-      }
-
-      if(Array.isArray(p.tags)&&p.tags.length){
-        const tags=document.createElement('div');
-        p.tags.forEach(t=>{ const s=document.createElement('span'); s.className='tag'; s.textContent='#'+t; tags.appendChild(s); });
-        wrap.appendChild(tags);
-      }
-
-      const cwrap=document.createElement('div'); cwrap.className='cmt-wrap';
-      const title=document.createElement('div'); title.className='cmt-title'; title.textContent='评论区';
-      const listBox=document.createElement('div'); listBox.className='cmt-list';
-      const form=document.createElement('div'); form.className='cmt-form';
-      const nick=document.createElement('input'); nick.type='text'; nick.placeholder='昵称（可选）';
-      const text=document.createElement('textarea'); text.rows=3; text.placeholder='写点什么…（最多 3 张图）';
-      const file=document.createElement('input'); file.type='file'; file.accept='image/*'; file.multiple=true;
-      const btnRow=document.createElement('div'); btnRow.className='cmt-actions';
-      const submit=document.createElement('button'); submit.className='cmt-btn primary'; submit.textContent='发表';
-      const refresh=document.createElement('button'); refresh.className='cmt-btn'; refresh.textContent='刷新评论';
-      btnRow.appendChild(submit); btnRow.appendChild(refresh);
-      form.appendChild(nick); form.appendChild(text); form.appendChild(file); form.appendChild(btnRow);
-      cwrap.appendChild(title); cwrap.appendChild(listBox); cwrap.appendChild(form);
-      wrap.appendChild(cwrap);
-
-      const cid = placeId(p);
-
-      async function renderList(){
-        listBox.innerHTML = '<div class="cmt-text" style="color:#94a3b8;">加载中...</div>';
-        try{
-          const arr = await getComments(cid);
-          listBox.innerHTML = '';
-          if(!arr.length){
-            const empty=document.createElement('div'); empty.className='cmt-text'; empty.style.color='#94a3b8'; empty.textContent='还没有评论，来当第一位吧～';
-            listBox.appendChild(empty); return;
-          }
-          arr.forEach(item=>{
-            const it=document.createElement('div'); it.className='cmt-item';
-            const meta=document.createElement('div'); meta.className='cmt-meta';
-            const nm=document.createElement('span'); nm.textContent=item.nick||'匿名';
-            const tm=document.createElement('span'); tm.textContent=new Date(item.created_at).toLocaleString();
-            meta.appendChild(nm); meta.appendChild(tm); it.appendChild(meta);
-            const body=document.createElement('div'); body.className='cmt-text'; body.textContent=item.text||''; it.appendChild(body);
-            if(Array.isArray(item.imgs)&&item.imgs.length){
-              const imgs=document.createElement('div'); imgs.className='cmt-imgs';
-              item.imgs.forEach(src=>{ const im=document.createElement('img'); im.src=src; imgs.appendChild(im); });
-              it.appendChild(imgs);
-            }
-            listBox.appendChild(it);
-          });
-        }catch(e){
-          console.warn(e);
-          listBox.innerHTML = '<div class="cmt-text" style="color:#ef4444;">评论加载失败，请稍后重试</div>';
-        }
-      }
-
-      renderList();
-
-      submit.addEventListener('click', async ()=>{
-        if(!canSubmit(cid)){ alert('操作太频繁，请稍后再试'); return; }
-
-        const content=(text.value||'').trim();
-        const files=Array.from(file.files||[]);
-        if(!content && !files.length){ alert('写点内容或选择图片再发表～'); return; }
-        if(files.length>3){ alert('最多选择 3 张图片'); return; }
-
-        const imgs=[];
-        try{
-          for(const f of files){
-            const dataURL=await compressImage(f,1024,0.8);
-            const sizeKB=Math.round((dataURL.length*3/4)/1024);
-            if(sizeKB>500){ alert('有图片压缩后仍大于 500KB，请换小一点的。'); return; }
-            imgs.push(dataURL);
-          }
-          await addComment({
-            placeId: cid,
-            nick: (nick.value||'').slice(0,20),
-            text: content.slice(0,2000),
-            imgs
-          });
-          text.value=''; file.value='';
-          await renderList();
-        }catch(e){
-          console.warn(e);
-          alert('提交失败，请稍后再试');
-        }
-      });
-
-      refresh.addEventListener('click', ()=> renderList());
-
-      return wrap;
-    }
-
-    function rebuildMarkers(list){
-      layerGroups.forEach(g=>map.removeLayer(g)); layerGroups.clear();
-      placesState.categories.forEach(cat=>layerGroups.set(cat,L.markerClusterGroup()));
-
-      list.forEach(p=>{
-        const m=L.marker(p.coords,{icon:emojiIcon(iconMap[p.category]||'📍')});
-        m.bindPopup(buildPopupDOM(p), { maxWidth: 420 });
-        (layerGroups.get(p.category) || layerGroups.values().next().value).addLayer(m);
-      });
-
-      layerGroups.forEach(g=>g.addTo(map));
-      fitAll();
-    }
-
-    function applyFilter(){
-      const checks=Array.from(document.querySelectorAll('.cat-check'));
-      const enabled=new Set(checks.filter(c=>c.checked).map(c=>c.value));
-      const q=(document.getElementById('searchInput')?.value||'').trim().toLowerCase();
-
-      const filtered=placesState.places.filter(p=>{
-        if(!enabled.has(p.category)) return false;
-        if(!q) return true;
-        const inTitle=(p.title||'').toLowerCase().includes(q);
-        const inTags=Array.isArray(p.tags)&&p.tags.join(',').toLowerCase().includes(q);
-        return inTitle||inTags;
-      });
-
-      rebuildMarkers(filtered);
-    }
-
-    function fitAll(){
-      const groupLayers=[...layerGroups.values()];
-      const flowPolylines=flowLayers.map(o=>o.polyline).filter(Boolean);
-      const flowDots=flowLayers.map(o=>o.dot).filter(Boolean);
-      const layers=[...groupLayers,...flowPolylines,...flowDots];
-      if(!layers.length) return;
-      const fg=L.featureGroup(layers);
-      map.fitBounds(fg.getBounds().pad(0.2));
-    }
-
-    document.getElementById('btnFit').onclick=fitAll;
-    document.getElementById('btnReset').onclick=()=>{ const s=document.getElementById('searchInput'); if(s) s.value=''; document.querySelectorAll('.cat-check').forEach(c=>c.checked=true); applyFilter(); };
-    let searchTimer=null; document.getElementById('searchInput').addEventListener('input',()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(applyFilter,250); });
-
-    function buildMarkers(p){
-      layerGroups.forEach(g=>map.removeLayer(g)); layerGroups.clear();
-      placesState.categories=new Set(p.map(x=>x.category)); placesState.places=p;
-      placesState.categories.forEach(c=>layerGroups.set(c,L.markerClusterGroup()));
-      rebuildMarkers(p); renderCategoryControls();
-    }
-
-    const flowLayers=[]; let flowAnimRunning=false;
-    function clearFlows(){ flowLayers.forEach(o=>{ if(o.polyline) map.removeLayer(o.polyline); if(o.dot) map.removeLayer(o.dot); }); flowLayers.length=0; }
     function buildFlows(flows){
-      clearFlows(); if(!flows||!flows.length) return;
+      clearFlows();
+      if(!flows || !flows.length) return;
+
       flows.forEach(f=>{
-        const c=f.coords||[]; if(c.length<2) return;
-        const color=f.color||'#2563eb';
-        const poly=L.polyline(c,{ color, weight:3, opacity:0.9, dashArray:'6 8' }).addTo(map);
-        const dot=L.circleMarker(c[0],{ radius:5, color, weight:2, fillOpacity:1 }).addTo(map);
-        flowLayers.push({ name:f.name||'flow', coords:c, color, polyline:poly, dot, idx:0, phase:0, speed:(f.speed||0.006) });
+        const c=f.coords||[];
+        if(c.length<2) return;
+
+        const poly=L.polyline(c,{
+          color:f.color||'#2563eb',
+          weight:3,
+          opacity:0.9,
+          dashArray:'6 8'
+        }).addTo(map);
+
+        const dot=L.circleMarker(c[0],{
+          radius:5, color:f.color||'#2563eb', weight:2, fillOpacity:1
+        }).addTo(map);
+
+        flowLayers.push({
+          name:f.name||'flow',
+          coords:c,
+          color:f.color||'#2563eb',
+          polyline:poly,
+          dot, idx:0,
+          phase:0,
+          speed:(f.speed||0.006)
+        });
       });
+
       startFlowAnimation();
     }
+
+    function renderFlowControls(flows) {
+      const box = document.getElementById("flowList");
+      box.innerHTML = "";
+
+      flows.forEach((f, idx) => {
+        const id = "flow_chk_" + idx;
+
+        const label = document.createElement("label");
+        label.style.display = "flex";
+        label.style.alignItems = "center";
+        label.style.gap = "6px";
+
+        label.innerHTML = `
+          <input type="checkbox" id="${id}" data-flow-index="${idx}" checked>
+          ${f.name}
+        `;
+
+        box.appendChild(label);
+
+        document.getElementById(id).addEventListener("change", (e) => {
+          const i = parseInt(e.target.dataset.flowIndex);
+          const on = e.target.checked;
+          const o = flowLayers[i];
+          if (!o) return;
+
+          if (on) {
+            if (!map.hasLayer(o.polyline)) o.polyline.addTo(map);
+            if (!map.hasLayer(o.dot)) o.dot.addTo(map);
+          } else {
+            if (map.hasLayer(o.polyline)) map.removeLayer(o.polyline);
+            if (map.hasLayer(o.dot)) map.removeLayer(o.dot);
+          }
+        });
+      });
+    }
+
     function startFlowAnimation(){
-      flowAnimRunning=true;
-      const step=()=>{
-        if(!flowAnimRunning) return;
+      flowAnimRunning = true;
+      const step = () => {
+        if (!flowAnimRunning) return;
         flowLayers.forEach(o=>{
           const a=o.coords[o.idx], b=o.coords[o.idx+1];
           if(!b){ o.idx=0; o.phase=0; return; }
+
           o.phase += o.speed;
           if(o.phase>=1){ o.phase=0; o.idx++; }
+
           const lat=a[0] + (b[0]-a[0])*o.phase;
           const lng=a[1] + (b[1]-a[1])*o.phase;
           o.dot.setLatLng([lat,lng]);
@@ -425,60 +183,36 @@
       requestAnimationFrame(step);
     }
     function stopFlowAnimation(){ flowAnimRunning=false; }
-    document.getElementById('chkFlows').addEventListener('change',e=>{
-      const on=e.target.checked;
+
+    document.getElementById("btnReplayFlows").addEventListener("click",()=>{
       flowLayers.forEach(o=>{
-        if(on){ if(!map.hasLayer(o.polyline)) o.polyline.addTo(map); if(!map.hasLayer(o.dot)) o.dot.addTo(map); }
-        else { if(map.hasLayer(o.polyline)) map.removeLayer(o.polyline); if(map.hasLayer(o.dot)) map.removeLayer(o.dot); }
+        o.idx=0; o.phase=0;
+        o.dot.setLatLng(o.coords[0]);
       });
-      if(on && !flowAnimRunning) startFlowAnimation();
-      if(!on && flowAnimRunning) stopFlowAnimation();
     });
-    document.getElementById('btnReplayFlows').addEventListener('click',()=>{
-      flowLayers.forEach(o=>{ o.idx=0; o.phase=0; if(o.coords[0]) o.dot.setLatLng(o.coords[0]); });
-      if(!flowAnimRunning && document.getElementById('chkFlows').checked) startFlowAnimation();
-    });
-    document.addEventListener('visibilitychange',()=>{ if(document.hidden) stopFlowAnimation(); else if(document.getElementById('chkFlows').checked) startFlowAnimation(); });
 
     async function loadPlaces(){
       try{
-        const res=await fetch('places.json?v='+Date.now(),{ cache:'no-cache' });
-        if(!res.ok) throw new Error('HTTP '+res.status);
-        const json=await res.json();
-        let places=[], flows=[];
-        if(Array.isArray(json)){ places=json; }
-        else if(json && json.type==='FeatureCollection'){
-          places=json.features.filter(f=>f.geometry?.type==='Point').map(f=>({
-            title:f.properties?.title??'',
-            category:f.properties?.category??'未分类',
-            description:f.properties?.description??'',
-            video:f.properties?.video??'',
-            tags:f.properties?.tags||[],
-            coords:[f.geometry.coordinates[1], f.geometry.coordinates[0]]
-          }));
-          flows=json.features.filter(f=>f.geometry?.type==='LineString').map((f,i)=>({
-            name:f.properties?.name||`flow-${i+1}`,
-            color:f.properties?.color||'#2563eb',
-            speed:f.properties?.speed||0.006,
-            coords:f.geometry.coordinates.map(([lng,lat])=>[lat,lng])
-          }));
-        } else if (json && typeof json==='object'){
-          places = Array.isArray(json.places) ? json.places : [];
-          flows  = Array.isArray(json.flows)  ? json.flows  : [];
-        } else {
-          throw new Error('Unknown JSON format');
-        }
-        buildMarkers(places); buildFlows(flows); fitAll();
+        const res = await fetch('places.json?v='+Date.now(),{ cache:'no-cache' });
+        const json = await res.json();
+
+        let places = json.places || [];
+        let flows = json.flows  || [];
+
+        buildMarkers(places);
+        buildFlows(flows);
+        renderFlowControls(flows);
+        fitAll();
+
       }catch(e){
-        console.warn('加载 places.json 失败', e);
+        console.warn("加载 places.json 失败", e);
       }
     }
 
-    const burger=document.getElementById('burger'); const sidebar=document.getElementById('sidebar');
-    burger.addEventListener('click',()=>{ sidebar.classList.toggle('open'); setTimeout(()=> map.invalidateSize(), 250); });
-    map.on('click',()=>{ if(window.matchMedia('(max-width:900px)').matches){ sidebar.classList.remove('open'); setTimeout(()=> map.invalidateSize(), 250); } });
+    /*****************************************************************/
 
     loadPlaces();
+
   </script>
 </body>
 </html>
