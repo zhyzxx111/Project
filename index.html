@@ -21,19 +21,36 @@
     .chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: #111; border: 1px solid #333; font-size: 12px; margin-right: 6px; }
     fieldset { border: 1px solid #374151; border-radius: 12px; padding: 10px 12px; margin: 12px 0; }
     legend { padding: 0 6px; color: #9ca3af; }
+
     .control-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; align-items: center; }
     .btn { padding: 8px 10px; border: 1px solid #374151; background: #0b1220; color: #e5e7eb; border-radius: 10px; cursor: pointer; font-size: 12px; }
     .input { padding: 8px 10px; border:1px solid #374151; background:#0b1220; color:#e5e7eb; border-radius:10px; font-size:14px; width:100%; }
+
     .tag { font-size: 12px; padding: 2px 6px; border-radius: 6px; background: #0f172a; border: 1px solid #1f2937; color: #cbd5e1; }
     .legend { display:flex; gap:8px; flex-wrap:wrap; margin-top: 6px; }
+
     .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb22; }
     .video-wrapper iframe { position: absolute; width: 100%; height: 100%; left:0; top:0; border:0; }
 
+    /* 🔥 移动端优化，避免侧边栏挡住地图控件 */
     #burger{position:absolute;z-index:1000;top:12px;left:12px;background:#111827;color:#e5e7eb;border:1px solid #1f2937;padding:8px 10px;border-radius:10px;display:none;}
+
     @media (max-width:900px){
       #app{ grid-template-columns:1fr; }
-      #sidebar{ position:absolute; z-index:1001; width:min(92vw,420px); height:100%; transform: translateX(-100%); transition: transform .25s ease; box-shadow: 0 10px 30px rgba(0,0,0,.35);}
+
+      #sidebar{
+        position:absolute;
+        z-index:1001;
+        width:300px;
+        max-width:85vw;
+        height:100%;
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      }
+
       #sidebar.open{ transform: translateX(0); }
+
       #burger{ display:block; }
     }
   </style>
@@ -42,6 +59,18 @@
 <body>
   <div id="app">
     <aside id="sidebar">
+
+      <button id="sidebarClose" style="
+        background:#0f172a;
+        border:1px solid #1f2937;
+        color:white;
+        border-radius:8px;
+        padding:6px 10px;
+        margin-bottom:10px;
+        cursor:pointer;
+        font-size:14px;
+      ">关闭 ×</button>
+
       <div class="brand">粤港澳文化活地图</div>
 
       <fieldset>
@@ -76,143 +105,409 @@
 
   <button id="burger">☰</button>
 
-  <script>
-    const SB_URL = 'https://dddgcpltndyfxlnaftnd.supabase.co';
-    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
+<script>
+/* =================== SUPABASE 评论系统 =================== */
 
-    const iconMap = { '饮食':'🍜', '节庆':'🎎', '语言':'🈶', '生活方式':'🏙️', '非遗艺术':'🪭', '建筑记忆':'🏯' };
-    const escapeHTML = (s='') => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    
-    const flowLayers = [];
-    let flowAnimRunning = false;
+const SB_URL = 'https://dddgcpltndyfxlnaftnd.supabase.co';
+const SB_KEY = '你的完整 Supabase key 填这里';
 
-    function clearFlows() {
-      flowLayers.forEach(o=>{
-        if(o.polyline) map.removeLayer(o.polyline);
-        if(o.dot) map.removeLayer(o.dot);
-      });
-      flowLayers.length = 0;
-    }
+/* 取评论 */
+async function getComments(pid){
+  const res = await fetch(
+    `${SB_URL}/rest/v1/comments?select=nick,text,imgs,created_at&place_id=eq.${encodeURIComponent(pid)}&order=created_at.desc`,
+    { headers:{apikey:SB_KEY, Authorization:`Bearer ${SB_KEY}`} }
+  );
+  return await res.json();
+}
 
-    function buildFlows(flows){
-      clearFlows();
-      if(!flows || !flows.length) return;
+/* 写评论 */
+async function addComment(data){
+  await fetch(`${SB_URL}/rest/v1/comments`,{
+    method:"POST",
+    headers:{
+      apikey:SB_KEY,
+      Authorization:`Bearer ${SB_KEY}`,
+      "Content-Type":"application/json",
+      Prefer:"return=minimal"
+    },
+    body: JSON.stringify(data)
+  });
+}
 
-      flows.forEach(f=>{
-        const c=f.coords||[];
-        if(c.length<2) return;
+/* =========== 工具函数 =========== */
+const iconMap = {饮食:"🍜",节庆:"🎎",语言:"🈶",生活方式:"🏙️",非遗艺术:"🪭",建筑记忆:"🏯"};
+const escapeHTML = (s='')=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-        const poly=L.polyline(c,{
-          color:f.color||'#2563eb',
-          weight:3,
-          opacity:0.9,
-          dashArray:'6 8'
-        }).addTo(map);
+function emojiIcon(e){ return L.divIcon({html:`<div style="font-size:20px">${e}</div>`, className:"emoji-icon", iconSize:[24,24], iconAnchor:[12,24]}); }
 
-        const dot=L.circleMarker(c[0],{
-          radius:5, color:f.color||'#2563eb', weight:2, fillOpacity:1
-        }).addTo(map);
+/* place 唯一 ID */
+function placeId(p){
+  const base=(p.title||"")+"|"+(Array.isArray(p.coords)?p.coords.join(","):"");
+  let h=0; for(let i=0;i<base.length;i++){ h=((h<<5)-h)+base.charCodeAt(i); h|=0; }
+  return "p"+(h>>>0);
+}
 
-        flowLayers.push({
-          name:f.name||'flow',
-          coords:c,
-          color:f.color||'#2563eb',
-          polyline:poly,
-          dot, idx:0,
-          phase:0,
-          speed:(f.speed||0.006)
-        });
-      });
+/* 压缩图片（用于评论上传） */
+async function compressImage(file,maxSide=1024,quality=0.8){
+  const img = await new Promise((res,rej)=>{
+    const url=URL.createObjectURL(file);
+    const i=new Image();
+    i.onload=()=>{res(i); URL.revokeObjectURL(url);};
+    i.onerror=rej;
+    i.src=url;
+  });
+  let {width:w, height:h} = img;
+  let tw=w, th=h;
+  if(Math.max(w,h)>maxSide){
+    if(w>h){ tw=maxSide; th=Math.round(h*maxSide/w); }
+    else{ th=maxSide; tw=Math.round(w*maxSide/h); }
+  }
+  const canvas=document.createElement("canvas");
+  canvas.width=tw; canvas.height=th;
+  canvas.getContext("2d").drawImage(img,0,0,tw,th);
+  return canvas.toDataURL("image/jpeg", quality);
+}
 
-      startFlowAnimation();
-    }
+/* ============ 渲染评论弹窗 ============ */
+function buildPopupDOM(p){
+  const wrap=document.createElement("div");
+  wrap.className="popup";
+  wrap.innerHTML = `<h3>${escapeHTML(p.title)}</h3><p>${escapeHTML(p.description||'')}</p>`;
 
-    function renderFlowControls(flows) {
-      const box = document.getElementById("flowList");
-      box.innerHTML = "";
-
-      flows.forEach((f, idx) => {
-        const id = "flow_chk_" + idx;
-
-        const label = document.createElement("label");
-        label.style.display = "flex";
-        label.style.alignItems = "center";
-        label.style.gap = "6px";
-
-        label.innerHTML = `
-          <input type="checkbox" id="${id}" data-flow-index="${idx}" checked>
-          ${f.name}
-        `;
-
-        box.appendChild(label);
-
-        document.getElementById(id).addEventListener("change", (e) => {
-          const i = parseInt(e.target.dataset.flowIndex);
-          const on = e.target.checked;
-          const o = flowLayers[i];
-          if (!o) return;
-
-          if (on) {
-            if (!map.hasLayer(o.polyline)) o.polyline.addTo(map);
-            if (!map.hasLayer(o.dot)) o.dot.addTo(map);
-          } else {
-            if (map.hasLayer(o.polyline)) map.removeLayer(o.polyline);
-            if (map.hasLayer(o.dot)) map.removeLayer(o.dot);
-          }
-        });
-      });
-    }
-
-    function startFlowAnimation(){
-      flowAnimRunning = true;
-      const step = () => {
-        if (!flowAnimRunning) return;
-        flowLayers.forEach(o=>{
-          const a=o.coords[o.idx], b=o.coords[o.idx+1];
-          if(!b){ o.idx=0; o.phase=0; return; }
-
-          o.phase += o.speed;
-          if(o.phase>=1){ o.phase=0; o.idx++; }
-
-          const lat=a[0] + (b[0]-a[0])*o.phase;
-          const lng=a[1] + (b[1]-a[1])*o.phase;
-          o.dot.setLatLng([lat,lng]);
-        });
-        requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    }
-    function stopFlowAnimation(){ flowAnimRunning=false; }
-
-    document.getElementById("btnReplayFlows").addEventListener("click",()=>{
-      flowLayers.forEach(o=>{
-        o.idx=0; o.phase=0;
-        o.dot.setLatLng(o.coords[0]);
-      });
+  /* 标签 */
+  if(p.tags?.length){
+    const tagBox=document.createElement("div");
+    p.tags.forEach(t=>{
+      const el=document.createElement("span");
+      el.className="tag";
+      el.textContent="#"+t;
+      tagBox.appendChild(el);
     });
+    wrap.appendChild(tagBox);
+  }
 
-    async function loadPlaces(){
-      try{
-        const res = await fetch('places.json?v='+Date.now(),{ cache:'no-cache' });
-        const json = await res.json();
+  /* 评论区容器 */
+  const cwrap=document.createElement("div");
+  cwrap.className="cmt-wrap";
+  cwrap.innerHTML=`<div class="cmt-title">评论区</div>
+                   <div class="cmt-list"></div>`;
+  wrap.appendChild(cwrap);
 
-        let places = json.places || [];
-        let flows = json.flows  || [];
+  const listBox=cwrap.querySelector(".cmt-list");
+  const pid=placeId(p);
 
-        buildMarkers(places);
-        buildFlows(flows);
-        renderFlowControls(flows);
-        fitAll();
-
-      }catch(e){
-        console.warn("加载 places.json 失败", e);
-      }
+  /* 加载评论 */
+  async function loadList(){
+    listBox.innerHTML="加载中...";
+    const arr=await getComments(pid);
+    listBox.innerHTML="";
+    if(!arr.length){
+      listBox.innerHTML=`<div style="color:#94a3b8">还没有评论～</div>`;
+      return;
     }
+    arr.forEach(cm=>{
+      const item=document.createElement("div");
+      item.className="cmt-item";
+      item.innerHTML=`<div class="cmt-meta">
+                        <span>${escapeHTML(cm.nick||"匿名")}</span>
+                        <span>${new Date(cm.created_at).toLocaleString()}</span>
+                      </div>
+                      <div class="cmt-text">${escapeHTML(cm.text||"")}</div>`;
+      if(cm.imgs?.length){
+        const box=document.createElement("div");
+        box.className="cmt-imgs";
+        cm.imgs.forEach(src=>{
+          const im=document.createElement("img");
+          im.src=src;
+          box.appendChild(im);
+        });
+        item.appendChild(box);
+      }
+      listBox.appendChild(item);
+    });
+  }
+  loadList();
 
-    /*****************************************************************/
+  /* 发表评论 UI */
+  const form=document.createElement("div");
+  form.className="cmt-form";
+  form.innerHTML=`
+    <input type="text" placeholder="昵称（可选）">
+    <textarea rows="3" placeholder="写点什么…"></textarea>
+    <input type="file" accept="image/*" multiple>
+    <button class="btn primary">发表</button>
+  `;
+  cwrap.appendChild(form);
 
-    loadPlaces();
+  const nick=form.children[0];
+  const text=form.children[1];
+  const file=form.children[2];
+  const btn=form.children[3];
 
-  </script>
+  btn.onclick=async()=>{
+    const content=text.value.trim();
+    const files=Array.from(file.files||[]);
+    if(!content && !files.length){ alert("写点内容或图片吧"); return; }
+
+    const imgs=[];
+    for(const f of files){
+      const data=await compressImage(f);
+      imgs.push(data);
+    }
+    await addComment({place_id:pid, nick:nick.value, text:content, imgs});
+    text.value=""; file.value="";
+    loadList();
+  };
+
+  return wrap;
+}
+
+/* ============ Marker 分类与渲染 ============ */
+const layerGroups=new Map();
+const placesState={ places:[], categories:new Set() };
+
+function renderCategoryControls(){
+  const container=document.getElementById("catContainer");
+  const legend=document.getElementById("legend");
+  container.innerHTML=""; legend.innerHTML="";
+
+  placesState.categories.forEach(cat=>{
+    const id=`cat_${cat}`;
+    const label=document.createElement("label");
+    label.innerHTML=`<input type="checkbox" class="cat-check" id="${id}" value="${cat}" checked> ${cat}`;
+    container.appendChild(label);
+
+    const chip=document.createElement("div");
+    chip.className="chip";
+    chip.innerHTML=`<span>${iconMap[cat]||"📍"}</span>${cat}`;
+    legend.appendChild(chip);
+  });
+
+  document.querySelectorAll(".cat-check").forEach(c=>c.addEventListener("change",applyFilter));
+}
+
+function rebuildMarkers(list){
+  /* 清除旧图层 */
+  layerGroups.forEach(g=>map.removeLayer(g));
+  layerGroups.clear();
+
+  placesState.categories.forEach(cat=>{
+    layerGroups.set(cat, L.markerClusterGroup());
+  });
+
+  /* 新 markers */
+  list.forEach(p=>{
+    const m=L.marker(p.coords,{icon:emojiIcon(iconMap[p.category]||"📍")});
+    m.bindPopup(buildPopupDOM(p), {maxWidth:420});
+    layerGroups.get(p.category).addLayer(m);
+  });
+
+  /* 加入地图 */
+  layerGroups.forEach(g=>g.addTo(map));
+}
+
+function applyFilter(){
+  const checks=[...document.querySelectorAll(".cat-check")];
+  const enabled=new Set(checks.filter(c=>c.checked).map(c=>c.value));
+
+  const q=document.getElementById("searchInput").value.trim().toLowerCase();
+
+  const filtered=placesState.places.filter(p=>{
+    if(!enabled.has(p.category)) return false;
+    if(!q) return true;
+    return (p.title||"").toLowerCase().includes(q)
+        || (p.tags||[]).join(",").toLowerCase().includes(q);
+  });
+
+  rebuildMarkers(filtered);
+  fitAll();
+}
+
+function fitAll(){
+  const layers=[...layerGroups.values()].flatMap(g=>g.getLayers());
+  const flowPolys=flowLayers.map(o=>o.polyline);
+  const flowDots=flowLayers.map(o=>o.dot);
+  const fg=L.featureGroup([...layers,...flowPolys,...flowDots]);
+  map.fitBounds(fg.getBounds().pad(0.2));
+}
+
+/* ========== 初始化地图 =========== */
+const map=L.map("map",{ center:[22.9,113.5], zoom:9, minZoom:3 });
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+  attribution:"© OpenStreetMap contributors"
+}).addTo(map);
+
+/* 左上角菜单按钮 */
+document.getElementById("burger").onclick=()=>{
+  document.getElementById("sidebar").classList.toggle("open");
+};
+
+document.getElementById("sidebarClose").onclick=()=>{
+  document.getElementById("sidebar").classList.remove("open");
+};
+/* =================== 流动路径（Flow Lines） =================== */
+
+const flowLayers=[];
+let flowAnimRunning=false;
+
+/* 清空所有流动线层 */
+function clearFlows(){
+  flowLayers.forEach(o=>{
+    if(o.polyline) map.removeLayer(o.polyline);
+    if(o.dot) map.removeLayer(o.dot);
+  });
+  flowLayers.length=0;
+}
+
+/* 生成流动线路 */
+function buildFlows(flows){
+  clearFlows();
+  if(!flows || !flows.length) return;
+
+  flows.forEach(f=>{
+    const c=f.coords||[];
+    if(c.length<2) return;
+
+    const color=f.color||"#2563eb";
+
+    const poly=L.polyline(c,{
+      color,
+      weight:3,
+      opacity:0.9,
+      dashArray:"6 8"
+    }).addTo(map);
+
+    const dot=L.circleMarker(c[0],{
+      radius:5,
+      color,
+      weight:2,
+      fillOpacity:1
+    }).addTo(map);
+
+    flowLayers.push({
+      name:f.name,
+      coords:c,
+      color,
+      polyline:poly,
+      dot,
+      idx:0,
+      phase:0,
+      speed:(f.speed||0.006)
+    });
+  });
+
+  startFlowAnimation();
+}
+
+/* 播放动画 */
+function startFlowAnimation(){
+  flowAnimRunning=true;
+  const step=()=>{
+    if(!flowAnimRunning) return;
+    flowLayers.forEach(o=>{
+      const a=o.coords[o.idx], b=o.coords[o.idx+1];
+      if(!b){ o.idx=0; o.phase=0; return; }
+
+      o.phase+=o.speed;
+      if(o.phase>=1){ o.phase=0; o.idx++; }
+
+      const lat=a[0]+(b[0]-a[0])*o.phase;
+      const lng=a[1]+(b[1]-a[1])*o.phase;
+      o.dot.setLatLng([lat,lng]);
+    });
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+function stopFlowAnimation(){ flowAnimRunning=false; }
+
+/* 重新播放按钮 */
+document.getElementById("btnReplayFlows").onclick=()=>{
+  flowLayers.forEach(o=>{
+    o.idx=0;
+    o.phase=0;
+    o.dot.setLatLng(o.coords[0]);
+  });
+};
+
+/* =================== 单独控制每条 Flow ON/OFF =================== */
+
+function renderFlowControls(flows){
+  const box=document.getElementById("flowList");
+  box.innerHTML="";
+
+  flows.forEach((f,idx)=>{
+    const id="flow_chk_"+idx;
+    const lbl=document.createElement("label");
+    lbl.style.display="flex";
+    lbl.style.alignItems="center";
+    lbl.style.gap="6px";
+
+    lbl.innerHTML=`
+      <input type="checkbox" id="${id}" data-flow="${idx}" checked>
+      ${f.name}
+    `;
+    box.appendChild(lbl);
+
+    document.getElementById(id).onchange=e=>{
+      const i=parseInt(e.target.dataset.flow);
+      const on=e.target.checked;
+      const o=flowLayers[i];
+      if(!o) return;
+
+      if(on){
+        if(!map.hasLayer(o.polyline)) o.polyline.addTo(map);
+        if(!map.hasLayer(o.dot)) o.dot.addTo(map);
+      }else{
+        if(map.hasLayer(o.polyline)) map.removeLayer(o.polyline);
+        if(map.hasLayer(o.dot)) map.removeLayer(o.dot);
+      }
+    };
+  });
+}
+
+/* =================== 加载 places.json =================== */
+
+async function loadPlaces(){
+  try{
+    const res=await fetch("places.json?v="+Date.now(), {cache:"no-cache"});
+    if(!res.ok) throw new Error("HTTP "+res.status);
+
+    const json=await res.json();
+
+    const places = Array.isArray(json.places) ? json.places : [];
+    const flows  = Array.isArray(json.flows)  ? json.flows  : [];
+
+    /* 保存状态 */
+    placesState.places=places;
+    placesState.categories=new Set(places.map(p=>p.category));
+
+    renderCategoryControls();
+    rebuildMarkers(places);
+
+    buildFlows(flows);
+    renderFlowControls(flows);
+
+    fitAll();
+
+  }catch(e){
+    console.warn("加载 places.json 失败", e);
+  }
+}
+
+/* =================== 启动程序 =================== */
+
+loadPlaces();
+
+/* 点击地图时自动收回侧边栏（手机端） */
+map.on("click",()=>{
+  if(window.innerWidth < 900){
+    document.getElementById("sidebar").classList.remove("open");
+  }
+});
+
+</script>
 </body>
 </html>
