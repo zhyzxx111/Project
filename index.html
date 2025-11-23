@@ -26,8 +26,21 @@
     .input { padding: 8px 10px; border:1px solid #374151; background:#0b1220; color:#e5e7eb; border-radius:10px; font-size:14px; width:100%; }
     .tag { font-size: 12px; padding: 2px 6px; border-radius: 6px; background: #0f172a; border: 1px solid #1f2937; color: #cbd5e1; }
     .legend { display:flex; gap:8px; flex-wrap:wrap; margin-top: 6px; }
-    .video-wrapper { position: relative; width: 100%; padding-bottom: 80%; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb22; }
-    .video-wrapper iframe { position: absolute; width: 160%; height: 160%; left:0; top:0; border:0; }
+    .video-wrapper {
+      width: 480px !important;
+      height: 640px !important;
+      max-width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb22;
+      position: relative;
+      }
+
+    .video-wrapper iframe {
+      width: 100% !important;
+      height: 100% !important;
+      }
+    
     .popup h3 { margin: 0 0 6px; font-size: 16px; }
     .popup p { margin: 0 0 8px; font-size: 13px; color:#cbd5e1; }
 
@@ -51,6 +64,10 @@
       #sidebar{ position:absolute; z-index:1001; width:min(92vw,420px); height:100%; transform: translateX(-100%); transition: transform .25s ease; box-shadow: 0 10px 30px rgba(0,0,0,.35);}
       #sidebar.open{ transform: translateX(0); }
       #burger{ display:block; }
+      .video-wrapper {
+        width: 300px !important;
+        height: 420px !important;
+      }
     }
   </style>
 </head>
