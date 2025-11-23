@@ -28,7 +28,7 @@
     .legend { display:flex; gap:8px; flex-wrap:wrap; margin-top: 6px; }
     .video-wrapper {
       width: 230px !important;
-      height: 300px !important;
+      height: 230px !important;
       max-width: 100%;
       border-radius: 12px;
       overflow: hidden;
@@ -65,7 +65,7 @@
       #sidebar.open{ transform: translateX(0); }
       #burger{ display:block; }
       .video-wrapper {
-        width: 180px !important;
+        width: 240px !important;
         height: 240px !important;
       }
     }
@@ -396,7 +396,7 @@
 
       list.forEach(p=>{
         const m=L.marker(p.coords,{icon:emojiIcon(iconMap[p.category]||'📍')});
-        m.bindPopup(buildPopupDOM(p), { maxWidth: 380 });
+        m.bindPopup(buildPopupDOM(p), { maxWidth: 460 });
         (layerGroups.get(p.category) || layerGroups.values().next().value).addLayer(m);
       });
 
