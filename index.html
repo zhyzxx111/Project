@@ -28,7 +28,7 @@
     .legend { display:flex; gap:8px; flex-wrap:wrap; margin-top: 6px; }
     .video-wrapper {
       width: 100% !important;
-      height: 230px !important;
+      height: 100% !important;
       max-width: 100%;
       border-radius: 12px;
       overflow: hidden;
@@ -66,7 +66,7 @@
       #burger{ display:block; }
       .video-wrapper {
         width: 100% !important;
-        height: 240px !important;
+        height: 100% !important;
       }
     }
   </style>
@@ -396,7 +396,7 @@
 
       list.forEach(p=>{
         const m=L.marker(p.coords,{icon:emojiIcon(iconMap[p.category]||'📍')});
-        m.bindPopup(buildPopupDOM(p), { maxWidth: 460 });
+        m.bindPopup(buildPopupDOM(p), { maxWidth: 300 });
         (layerGroups.get(p.category) || layerGroups.values().next().value).addLayer(m);
       });
 
