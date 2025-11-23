@@ -27,8 +27,8 @@
     .tag { font-size: 12px; padding: 2px 6px; border-radius: 6px; background: #0f172a; border: 1px solid #1f2937; color: #cbd5e1; }
     .legend { display:flex; gap:8px; flex-wrap:wrap; margin-top: 6px; }
     .video-wrapper {
-      width: 340px !important;
-      height: 460px !important;
+      width: 230px !important;
+      height: 300px !important;
       max-width: 100%;
       border-radius: 12px;
       overflow: hidden;
@@ -65,8 +65,8 @@
       #sidebar.open{ transform: translateX(0); }
       #burger{ display:block; }
       .video-wrapper {
-        width: 260px !important;
-        height: 360px !important;
+        width: 180px !important;
+        height: 240px !important;
       }
     }
   </style>
@@ -396,7 +396,7 @@
 
       list.forEach(p=>{
         const m=L.marker(p.coords,{icon:emojiIcon(iconMap[p.category]||'📍')});
-        m.bindPopup(buildPopupDOM(p), { maxWidth: 420 });
+        m.bindPopup(buildPopupDOM(p), { maxWidth: 380 });
         (layerGroups.get(p.category) || layerGroups.values().next().value).addLayer(m);
       });
 
