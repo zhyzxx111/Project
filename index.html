@@ -77,7 +77,7 @@
         </div>
       </fieldset>
 
-      <!-- ✅ 改成 12 条可单独开关 -->
+      <!-- ✅ 12 条可单独开关 -->
       <fieldset>
         <legend>流动路径（可单独开关）</legend>
         <div id="flowList" class="control-row" style="flex-direction:column; align-items:flex-start;"></div>
@@ -193,6 +193,38 @@
 
       iframe.addEventListener('load', () => clearTimeout(timeout));
     }
+
+    /* ======= Douyin 抖音视频优雅降级 ======= */
+    function isDouyin(url){
+      return /douyin\.com|v\.douyin\.com/.test(url || '');
+    }
+
+    function renderDouyinGracefully(container, input){
+      if (!isDouyin(input)) return false;
+
+      const card = document.createElement('a');
+      card.href = input;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.style.display = 'block';
+      card.style.position = 'relative';
+      card.style.borderRadius = '12px';
+      card.style.overflow = 'hidden';
+      card.style.background = '#020617';
+      card.style.border = '1px solid #334155';
+      card.style.padding = '18px 14px';
+      card.style.textDecoration = 'none';
+      card.style.color = '#e5e7eb';
+
+      card.innerHTML = `
+        <div style="font-size:14px;opacity:.8;margin-bottom:6px;">抖音视频无法在地图内嵌播放</div>
+        <div style="font-size:16px;font-weight:600;margin-bottom:10px;">点击在抖音中查看</div>
+        <div style="font-size:12px;opacity:.7;">链接：${escapeHTML(input)}</div>
+      `;
+
+      container.appendChild(card);
+      return true;
+    }
     /* ======= 优雅降级工具结束 ======= */
 
     function emojiIcon(e){return L.divIcon({html:`<div style="font-size:20px">${e}</div>`,className:'emoji-icon',iconSize:[24,24],iconAnchor:[12,24],popupAnchor:[0,-20]});}
@@ -243,7 +275,12 @@
 
       if (p.video) {
         const vbox = document.createElement('div');
-        renderYouTubeGracefully(vbox, p.video);
+
+        // 先判断抖音，再走 YouTube 降级
+        if (!renderDouyinGracefully(vbox, p.video)) {
+          renderYouTubeGracefully(vbox, p.video);
+        }
+
         wrap.appendChild(vbox);
       }
 
@@ -473,7 +510,6 @@
             if(map.hasLayer(o.dot)) map.removeLayer(o.dot);
           }
 
-          // 如果全部都关了，就停动画；否则确保动画在跑
           const anyOn = Array.from(document.querySelectorAll('#flowList input[type="checkbox"]')).some(cb=>cb.checked);
           if(!anyOn) stopFlowAnimation();
           else if(!flowAnimRunning) startFlowAnimation();
