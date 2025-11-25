@@ -211,65 +211,32 @@
       iframe.addEventListener('load', () => clearTimeout(timeout));
     }
 
-    /* ======= Douyin 抖音视频优雅降级 ======= */
-  /* ======= Douyin 抖音视频优雅降级（含封面） ======= */
-function isDouyin(url){
-  return /douyin\.com|v\.douyin\.com/.test(url || '');
-}
+function isDouyin(url){ return /douyin\.com|v\.douyin\.com/.test(url||''); }
 
-// 尝试从抖音链接中提取视频 ID（无规律，只能提取最后 8～12 字符数字串）
-function extractDouyinId(url){
-  if(!url) return null;
-  const match = url.match(/video\/(\d+)/);
-  return match ? match[1] : null;
-}
 
 function renderDouyinGracefully(container, input){
-  if (!isDouyin(input)) return false;
+if(!isDouyin(input)) return false;
 
-  const vid = extractDouyinId(input);
-  
-  const cover = vid 
-    ? `https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/${vid}~tplv-obj.image?x-expires=2147483647&x-signature=xxx`
-    : null;
 
-  const card = document.createElement('a');
-  card.href = input;
-  card.target = '_blank';
-  card.rel = 'noopener noreferrer';
-  card.style.display = 'block';
-  card.style.position = 'relative';
-  card.style.borderRadius = '12px';
-  card.style.overflow = 'hidden';
-  card.style.background = '#020617';
-  card.style.border = '1px solid #334155';
-  card.style.textDecoration = 'none';
-  card.style.color = '#e5e7eb';
-  card.style.marginBottom = '12px';
+const card=document.createElement('a');
+card.href=input;
+card.target='_blank';
+card.rel='noopener noreferrer';
+card.style.cssText='display:block;position:relative;border-radius:12px;overflow:hidden;background:#020617;border:1px solid #334155;text-decoration:none;color:#e5e7eb;margin-bottom:12px;';
 
-  card.innerHTML = `
-    <div style="font-weight:600;font-size:15px;padding:12px 14px 8px;">抖音视频</div>
 
-    <div style="width:100%;overflow:hidden;">
-      ${cover ? `
-        <img src="${cover}" 
-             style="width:100%;display:block;object-fit:cover;max-height:260px;">
-      ` : `
-        <div style="width:100%;height:180px;background:#0f172a;
-          display:flex;align-items:center;justify-content:center;font-size:13px;">
-          无法获取封面
-        </div>
-      `}
-    </div>
+const defaultCover="https://lf3-static.bytednsdoc.com/obj/eden-cn/loh7uv_xzpxnuv/eden.png";
 
-    <div style="padding:12px 14px;font-size:14px;">
-      点击在抖音中查看<br>
-      <span style="opacity:.6;font-size:12px;">${escapeHTML(input)}</span>
-    </div>
-  `;
 
-  container.appendChild(card);
-  return true;
+card.innerHTML=`
+<div style="font-weight:600;font-size:15px;padding:12px 14px 8px;">抖音视频</div>
+<img src="${defaultCover}" style="width:100%;display:block;object-fit:cover;max-height:260px;">
+<div style="padding:12px 14px;font-size:14px;">点击在抖音中查看<br><span style="opacity:.6;font-size:12px;">${input}</span></div>
+`;
+
+
+container.appendChild(card);
+return true;
 }
 
     /* ======= 优雅降级工具结束 ======= */
