@@ -240,11 +240,13 @@
       card.style.cssText='display:block;position:relative;border-radius:12px;overflow:hidden;background:#020617;border:1px solid #334155;text-decoration:none;color:#e5e7eb;margin-bottom:12px;';
 
       // 固定一张通用 TikTok/抖音风格封面，保证手机端也能加载
-      const defaultCover = 'https://upload.wikimedia.org/wikipedia/commons/0/08/TikTok_logo.svg';
+      const defaultCover = "https://lf3-static.bytednsdoc.com/obj/eden-cn/lmeh7uvhpi/tt_default_cover.png";
 
       card.innerHTML =
         '<div style="font-weight:600;font-size:15px;padding:12px 14px 8px;">抖音视频</div>' +
-        '<img src="' + defaultCover + '" style="width:100%;display:block;object-fit:contain;max-height:220px;background:#000;">' +
+        '<img src="${defaultCover}"
+           onerror="this.src='https://dummyimage.com/600x350/020617/ffffff&text=Douyin+Video'"
+           style="width:100%;display:block;object-fit:cover;max-height:260px;">' +
         '<div style="padding:12px 14px;font-size:14px;">点击在抖音中查看<br>' +
         '<span style="opacity:.6;font-size:12px;">' + escapeHTML(input) + '</span></div>';
 
