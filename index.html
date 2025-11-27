@@ -229,7 +229,6 @@
 
     /* ======= Douyin 抖音视频优雅降级：统一用固定封面 + 点击跳转 ======= */
     function isDouyin(url){ return /douyin\.com|v\.douyin\.com/.test(url || ''); }
-
     function renderDouyinGracefully(container, input){
       if(!isDouyin(input)) return false;
 
@@ -253,6 +252,34 @@
       container.appendChild(card);
       return true;
     }
+    function isBilibili(url){
+  return /bilibili\.com\/video\/BV|b23\.tv/.test(url || '')
+}
+
+function extractBVID(url){
+  const m = url.match(/BV[a-zA-Z0-9]+/);
+  return m ? m[0] : null;
+}
+
+function renderBilibiliPlayer(container, url){
+  if(!isBilibili(url)) return false;
+
+  const bvid = extractBVID(url);
+  if(!bvid) return false;
+
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://player.bilibili.com/player.html?bvid=${bvid}&high_quality=1&danmaku=0`;
+  iframe.allow = "fullscreen; autoplay";
+  iframe.referrerPolicy = "no-referrer";
+
+  const wrap = document.createElement("div");
+  wrap.className = "video-wrapper";
+  wrap.appendChild(iframe);
+
+  container.appendChild(wrap);
+  return true;
+}
+
     /* ======= 优雅降级工具结束 ======= */
 
     function emojiIcon(e){
@@ -345,9 +372,11 @@
       if (p.video) {
         const vbox = document.createElement('div');
         // 抖音优先，其次 YouTube/其他
-        if (!renderDouyinGracefully(vbox, p.video)) {
-          renderYouTubeGracefully(vbox, p.video);
-        }
+if (!renderBilibiliPlayer(vbox, p.video)) {
+  if (!renderDouyinGracefully(vbox, p.video)) {
+    renderYouTubeGracefully(vbox, p.video);
+  }
+}
         wrap.appendChild(vbox);
       }
 
