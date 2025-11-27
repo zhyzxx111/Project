@@ -297,29 +297,51 @@ function isXHS(url){
 }
 
 function renderXHSGracefully(container, url){
-  if(!isXHS(url)) {
-    return false;
-  }
+  if(!/xiaohongshu\.com/.test(url||'')) return false;
 
+  const wrap = document.createElement("div");
+  wrap.className = "video-wrapper";
+
+  // 小红书默认封面（稳定）
   const cover = "https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaohongshu_logo.svg";
 
-  const card = document.createElement("a");
-  card.className = "xhs-card";
-  card.href = url;
-  card.target = "_blank";
-  card.rel = "noopener noreferrer";
-  card.style.cssText = "display:block;border-radius:12px;overflow:hidden;background:#020617;border:1px solid #334155;color:#e5e7eb;text-decoration:none;margin-bottom:12px;";
+  wrap.innerHTML = `
+    <div style="position:relative;width:100%;height:100%;background:#000;border-radius:12px;overflow:hidden;">
+      
+      <img src="${cover}"
+           style="width:100%;height:100%;object-fit:contain;background:#0f172a;"/>
 
-  card.innerHTML = `
-    <div style="font-weight:600;font-size:15px;padding:12px 14px 8px;">小红书</div>
-    <img src="${cover}" style="width:100%;display:block;object-fit:contain;max-height:220px;background:#0f172a;">
-    <div style="padding:12px 14px;font-size:14px;">
-      点击在小红书中查看<br>
-      <span style="opacity:.6;font-size:12px;">${escapeHTML(url)}</span>
+      <div style="
+        position:absolute;
+        inset:0;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.55));
+        color:white;
+        font-size:14px;
+      ">
+        <div style="font-size:18px;font-weight:700;margin-bottom:8px;">小红书</div>
+        <button style="
+          background:#ff2442;
+          color:white;
+          padding:8px 14px;
+          border:none;
+          border-radius:999px;
+          cursor:pointer;
+          font-size:13px">
+          点击在小红书中打开
+        </button>
+      </div>
+
+      <a href="${url}" target="_blank"
+         style="position:absolute;inset:0;"></a>
+
     </div>
   `;
 
-  container.appendChild(card);
+  container.appendChild(wrap);
   return true;
 }
 
