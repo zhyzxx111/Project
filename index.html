@@ -39,7 +39,20 @@
       width: 100% !important;
       height: 100% !important;
     }
+    .xhs-card {
+  max-height: 280px;
+  overflow: hidden;
+}
 
+.xhs-card img {
+  max-height: 160px;
+  object-fit: cover;
+}
+
+.xhs-card > div:last-child {
+  max-height: 50px;
+  overflow-y: auto;
+}
     .popup h3 { margin: 0 0 6px; font-size: 16px; }
     .popup p { margin: 0 0 8px; font-size: 13px; color:#cbd5e1; }
 
@@ -291,6 +304,7 @@ function renderXHSGracefully(container, url){
   const cover = "https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaohongshu_logo.svg";
 
   const card = document.createElement("a");
+  card.className = "xhs-card";
   card.href = url;
   card.target = "_blank";
   card.rel = "noopener noreferrer";
