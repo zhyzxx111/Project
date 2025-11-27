@@ -279,6 +279,34 @@ function renderBilibiliPlayer(container, url){
   container.appendChild(wrap);
   return true;
 }
+    function isXHS(url){
+  return /xiaohongshu\.com/.test(url || '');
+}
+
+function renderXHSGracefully(container, url){
+  if(!isXHS(url)) return false;
+
+  const cover = "https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaohongshu_logo.svg";
+
+  const card = document.createElement("a");
+  card.href = url;
+  card.target = "_blank";
+  card.rel = "noopener noreferrer";
+  card.style.cssText = "display:block;border-radius:12px;overflow:hidden;background:#020617;border:1px solid #334155;color:#e5e7eb;text-decoration:none;margin-bottom:12px;";
+
+  card.innerHTML = `
+    <div style="font-weight:600;font-size:15px;padding:12px 14px 8px;">小红书</div>
+    <img src="${cover}" style="width:100%;display:block;object-fit:contain;max-height:220px;background:#0f172a;">
+    <div style="padding:12px 14px;font-size:14px;">
+      点击在小红书中查看<br>
+      <span style="opacity:.6;font-size:12px;">${url}</span>
+    </div>
+  `;
+
+  container.appendChild(card);
+  return true;
+}
+
 
     /* ======= 优雅降级工具结束 ======= */
 
@@ -373,8 +401,11 @@ function renderBilibiliPlayer(container, url){
         const vbox = document.createElement('div');
         // 抖音优先，其次 YouTube/其他
 if (!renderBilibiliPlayer(vbox, p.video)) {
-  if (!renderDouyinGracefully(vbox, p.video)) {
-    renderYouTubeGracefully(vbox, p.video);
+  if (!renderXHSGracefully(vbox, p.video)) {
+    if (!renderDouyinGracefully(vbox, p.video)) {
+      renderYouTubeGracefully(vbox, p.video);
+      }
+    }
   }
 }
         wrap.appendChild(vbox);
