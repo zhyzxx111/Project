@@ -478,40 +478,41 @@ if (!renderBilibiliPlayer(vbox, p.video)) {
 
       renderList();
 
-      submit.addEventListener('click', async function(){
-        if(!canSubmit(cid)){ alert('操作太频繁，请稍后再试'); return; }
+submit.addEventListener('click', async function(){
+  if(!canSubmit(cid)){ alert('操作太频繁，请稍后再试'); return; }
 
-        const content=(text.value||'').trim();
-        const files=Array.from(file.files||[]);
-        if(!content && !files.length){ alert('写点内容或选择图片再发表～'); return; }
-        if(files.length>3){ alert('最多选择 3 张图片'); return; }
+  const content=(text.value||'').trim();
+  const files=Array.from(file.files||[]);
+  if(!content && !files.length){ alert('写点内容或选择图片再发表～'); return; }
+  if(files.length>3){ alert('最多选择 3 张图片'); return; }
 
-        const imgs=[];
-        try{
-          for(const f of files){
-            const dataURL=await compressImage(f,1024,0.8);
-            const sizeKB=Math.round((dataURL.length*3/4)/1024);
-            if(sizeKB>500){ alert('有图片压缩后仍大于 500KB，请换小一点的。'); return; }
-            imgs.push(dataURL);
-          }
-          await addComment({
-            placeId: cid,
-            nick: (nick.value||'').slice(0,20),
-            text: content.slice(0,2000),
-            imgs
-          });
-          text.value=''; file.value='';
-          await renderList();
-        }catch(e){
-          console.warn(e);
-          alert('提交失败，请稍后再试');
-        }
-      });
-
-      refresh.addEventListener('click', function(){ renderList(); });
-
-      return wrap;
+  const imgs=[];
+  try{
+    for(const f of files){
+      const dataURL=await compressImage(f,1024,0.8);
+      const sizeKB=Math.round((dataURL.length*3/4)/1024);
+      if(sizeKB>500){ alert('有图片压缩后仍大于 500KB，请换小一点的。'); return; }
+      imgs.push(dataURL);
     }
+    await addComment({
+      placeId: cid,
+      nick: (nick.value||'').slice(0,20),
+      text: content.slice(0,2000),
+      imgs
+    });
+    text.value=''; 
+    file.value='';
+    await renderList();
+  }catch(e){
+    console.warn(e);
+    alert('提交失败，请稍后再试');
+  }
+});
+
+refresh.addEventListener('click', function(){ renderList(); });
+
+return wrap;
+
 
     function rebuildMarkers(list){
       layerGroups.forEach(function(g){ map.removeLayer(g); });
