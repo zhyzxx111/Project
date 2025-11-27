@@ -511,9 +511,8 @@ submit.addEventListener('click', async function(){
 
 refresh.addEventListener('click', function(){ renderList(); });
 
-return wrap;
-
-
+  return wrap;
+}
     function rebuildMarkers(list){
       layerGroups.forEach(function(g){ map.removeLayer(g); });
       layerGroups.clear();
