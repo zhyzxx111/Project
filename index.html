@@ -244,9 +244,9 @@
 
       card.innerHTML =
         '<div style="font-weight:600;font-size:15px;padding:12px 14px 8px;">抖音视频</div>' +
-        '<img src="${defaultCover}"
-           onerror="this.src='https://dummyimage.com/600x350/020617/ffffff&text=Douyin+Video'"
-           style="width:100%;display:block;object-fit:cover;max-height:260px;">' +
+        '<img src="' + defaultCover + '" ' +
+        'onerror="this.src=\'https://dummyimage.com/600x350/020617/ffffff&text=Douyin+Video\'" ' +
+        'style="width:100%;display:block;object-fit:cover;max-height:260px;">' +
         '<div style="padding:12px 14px;font-size:14px;">点击在抖音中查看<br>' +
         '<span style="opacity:.6;font-size:12px;">' + escapeHTML(input) + '</span></div>';
 
