@@ -6,7 +6,7 @@
   <title>粤港澳文化活地图</title>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous"/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"> </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
@@ -34,13 +34,12 @@
       overflow: hidden;
       border: 1px solid #e5e7eb22;
       position: relative;
-      }
-
+    }
     .video-wrapper iframe {
       width: 100% !important;
       height: 100% !important;
-      }
-    
+    }
+
     .popup h3 { margin: 0 0 6px; font-size: 16px; }
     .popup p { margin: 0 0 8px; font-size: 13px; color:#cbd5e1; }
 
@@ -94,7 +93,7 @@
         </div>
       </fieldset>
 
-      <!-- ✅ 12 条可单独开关 -->
+      <!-- 12 条可单独开关 -->
       <fieldset>
         <legend>流动路径（可单独开关）</legend>
         <div id="flowList" class="control-row" style="flex-direction:column; align-items:flex-start;"></div>
@@ -113,47 +112,66 @@
     const SB_URL = 'https://dddgcpltndyfxlnaftnd.supabase.co';
     const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRkZGdjcGx0bmR5ZnhsbmFmdG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxODYyMTcsImV4cCI6MjA3NTc2MjIxN30.RrD1PQppROWTnCgkY16gRvBGbmrLLMRwCMlRBdITeUw';
 
+    // === 评论：加 try/catch，防止手机端接口错误导致整页白屏 ===
     async function getComments(placeId) {
-      const url = `${SB_URL}/rest/v1/comments?select=nick,text,imgs,created_at&place_id=eq.${encodeURIComponent(placeId)}&order=created_at.desc`;
-      const res = await fetch(url, {
-        headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` }
-      });
-      if (!res.ok) throw new Error('fetch error ' + res.status);
-      return await res.json();
+      try {
+        const url = SB_URL + '/rest/v1/comments'
+          + '?select=nick,text,imgs,created_at'
+          + '&place_id=eq.' + encodeURIComponent(placeId)
+          + '&order=created_at.desc';
+
+        const res = await fetch(url, {
+          headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY }
+        });
+        if (!res.ok) throw new Error('fetch error ' + res.status);
+        return await res.json();
+      } catch (e) {
+        console.warn('评论接口失败（手机可能被拦截）', e);
+        return []; // 返回空数组，不影响页面其他功能
+      }
     }
 
     async function addComment({ placeId, nick, text, imgs }) {
-      const res = await fetch(`${SB_URL}/rest/v1/comments`, { 
-        method: 'POST',
-        headers: {
-          apikey: SB_KEY,
-          Authorization: `Bearer ${SB_KEY}`,
-          'Content-Type': 'application/json',
-          Prefer: 'return=minimal'
-        },
-        body: JSON.stringify({ place_id: placeId, nick, text, imgs })
-      });
-      if (!res.ok) throw new Error('insert error ' + res.status);
+      try {
+        const res = await fetch(SB_URL + '/rest/v1/comments', {
+          method: 'POST',
+          headers: {
+            apikey: SB_KEY,
+            Authorization: 'Bearer ' + SB_KEY,
+            'Content-Type': 'application/json',
+            Prefer: 'return=minimal'
+          },
+          body: JSON.stringify({ place_id: placeId, nick, text, imgs })
+        });
+        if (!res.ok) throw new Error('insert error ' + res.status);
+      } catch (e) {
+        console.warn('评论提交失败', e);
+        alert('评论暂时提交失败，但不影响看地图和视频～');
+      }
     }
 
     const iconMap = { '饮食':'🍜', '节庆':'🎎', '语言':'🈶', '生活方式':'🏙️', '非遗艺术':'🪭', '建筑记忆':'🏯' };
-    const escapeHTML = (s='') => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function escapeHTML(s){
+      s = s || '';
+      return s.replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+      });
+    }
 
     /* ======= YouTube 优雅降级工具 ======= */
-    function ytParseId(input='') {
-      const s = String(input).trim();
-      return (
-        s.match(/youtu\.be\/([^?&#/]+)/)?.[1] ||
-        s.match(/[?&#]v=([^?&#/]+)/)?.[1] ||
-        s.match(/\/shorts\/([^?&#/]+)/)?.[1] ||
-        (s.length === 11 ? s : null)
-      );
+    function ytParseId(input) {
+      const s = String(input || '').trim();
+      var m;
+      m = s.match(/youtu\.be\/([^?&#/]+)/); if (m) return m[1];
+      m = s.match(/[?&#]v=([^?&#/]+)/); if (m) return m[1];
+      m = s.match(/\/shorts\/([^?&#/]+)/); if (m) return m[1];
+      return s.length === 11 ? s : null;
     }
     function ytEmbedUrl(id) {
-      return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1&origin=${encodeURIComponent(location.origin)}`;
+      return 'https://www.youtube.com/embed/' + id + '?rel=0&modestbranding=1&playsinline=1&origin=' + encodeURIComponent(location.origin);
     }
-    function ytWatchUrl(id) { return `https://www.youtube.com/watch?v=${id}`; }
-    function ytThumb(id) { return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
+    function ytWatchUrl(id) { return 'https://www.youtube.com/watch?v=' + id; }
+    function ytThumb(id) { return 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg'; }
 
     function renderYouTubeGracefully(container, input) {
       const id = ytParseId(input);
@@ -179,14 +197,11 @@
       fallback.style.position = 'relative';
       fallback.style.borderRadius = '12px';
       fallback.style.overflow = 'hidden';
-      fallback.innerHTML = `
-        <img src="${ytThumb(id)}" alt="YouTube thumbnail" style="width:100%;display:block">
-        <span style="position:absolute;inset:0;display:grid;place-items:center">
-          <button style="padding:8px 12px;border:none;border-radius:999px;background:#0009;color:#fff">
-            在 YouTube 打开
-          </button>
-        </span>
-      `;
+      fallback.innerHTML =
+        '<img src="' + ytThumb(id) + '" alt="YouTube thumbnail" style="width:100%;display:block">' +
+        '<span style="position:absolute;inset:0;display:grid;place-items:center">' +
+        '<button style="padding:8px 12px;border:none;border-radius:999px;background:#0009;color:#fff">在 YouTube 打开</button>' +
+        '</span>';
       container.appendChild(fallback);
 
       const iframe = document.createElement('iframe');
@@ -202,53 +217,80 @@
 
       container.replaceChild(wrap, fallback);
 
-      const timeout = setTimeout(() => {
+      const timeout = setTimeout(function () {
         if (container.contains(wrap)) {
           container.replaceChild(fallback, wrap);
         }
       }, 1800);
 
-      iframe.addEventListener('load', () => clearTimeout(timeout));
+      iframe.addEventListener('load', function(){ clearTimeout(timeout); });
     }
 
-function isDouyin(url){ return /douyin\.com|v\.douyin\.com/.test(url||''); }
+    /* ======= Douyin 抖音视频优雅降级：统一用固定封面 + 点击跳转 ======= */
+    function isDouyin(url){ return /douyin\.com|v\.douyin\.com/.test(url || ''); }
 
+    function renderDouyinGracefully(container, input){
+      if(!isDouyin(input)) return false;
 
-function renderDouyinGracefully(container, input){
-if(!isDouyin(input)) return false;
+      const card=document.createElement('a');
+      card.href=input;
+      card.target='_blank';
+      card.rel='noopener noreferrer';
+      card.style.cssText='display:block;position:relative;border-radius:12px;overflow:hidden;background:#020617;border:1px solid #334155;text-decoration:none;color:#e5e7eb;margin-bottom:12px;';
 
+      // 固定一张通用 TikTok/抖音风格封面，保证手机端也能加载
+      const defaultCover = 'https://upload.wikimedia.org/wikipedia/commons/0/08/TikTok_logo.svg';
 
-const card=document.createElement('a');
-card.href=input;
-card.target='_blank';
-card.rel='noopener noreferrer';
-card.style.cssText='display:block;position:relative;border-radius:12px;overflow:hidden;background:#020617;border:1px solid #334155;text-decoration:none;color:#e5e7eb;margin-bottom:12px;';
+      card.innerHTML =
+        '<div style="font-weight:600;font-size:15px;padding:12px 14px 8px;">抖音视频</div>' +
+        '<img src="' + defaultCover + '" style="width:100%;display:block;object-fit:contain;max-height:220px;background:#000;">' +
+        '<div style="padding:12px 14px;font-size:14px;">点击在抖音中查看<br>' +
+        '<span style="opacity:.6;font-size:12px;">' + escapeHTML(input) + '</span></div>';
 
-
-const defaultCover = "https://upload.wikimedia.org/wikipedia/commons/0/08/TikTok_logo.svg";
-
-
-card.innerHTML=`
-<div style="font-weight:600;font-size:15px;padding:12px 14px 8px;">抖音视频</div>
-<img src="${defaultCover}" style="width:100%;display:block;object-fit:cover;max-height:260px;">
-<div style="padding:12px 14px;font-size:14px;">点击在抖音中查看<br><span style="opacity:.6;font-size:12px;">${input}</span></div>
-`;
-
-
-container.appendChild(card);
-return true;
-}
-
+      container.appendChild(card);
+      return true;
+    }
     /* ======= 优雅降级工具结束 ======= */
 
-    function emojiIcon(e){return L.divIcon({html:`<div style="font-size:20px">${e}</div>`,className:'emoji-icon',iconSize:[24,24],iconAnchor:[12,24],popupAnchor:[0,-20]});}
-    function placeId(p){ const base=(p.title||'')+'|'+(Array.isArray(p.coords)?p.coords.join(','):''); let h=0; for(let i=0;i<base.length;i++){ h=((h<<5)-h)+base.charCodeAt(i); h|=0; } return 'p'+(h>>>0); }
+    function emojiIcon(e){
+      return L.divIcon({
+        html:'<div style="font-size:20px">' + e + '</div>',
+        className:'emoji-icon',
+        iconSize:[24,24],
+        iconAnchor:[12,24],
+        popupAnchor:[0,-20]
+      });
+    }
+    function placeId(p){
+      var base = (p.title || '') + '|' + (Array.isArray(p.coords) ? p.coords.join(',') : '');
+      var h=0;
+      for(var i=0;i<base.length;i++){
+        h=((h<<5)-h)+base.charCodeAt(i);
+        h|=0;
+      }
+      return 'p'+(h>>>0);
+    }
 
-    async function compressImage(file, maxSide=1024, quality=0.8){
-      const img = await new Promise((res, rej)=>{ const url=URL.createObjectURL(file); const i=new Image(); i.onload=()=>{res(i);URL.revokeObjectURL(url);}; i.onerror=rej; i.src=url; });
-      const w=img.width, h=img.height; let tw=w, th=h;
-      if(Math.max(w,h)>maxSide){ if(w>h){ tw=maxSide; th=Math.round(h*maxSide/w);} else{ th=maxSide; tw=Math.round(w*maxSide/h);} }
-      const canvas=document.createElement('canvas'); canvas.width=tw; canvas.height=th; const ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,tw,th);
+    async function compressImage(file, maxSide, quality){
+      maxSide = maxSide || 1024;
+      quality = quality || 0.8;
+      const img = await new Promise(function(res, rej){
+        const url=URL.createObjectURL(file);
+        const i=new Image();
+        i.onload=function(){ res(i); URL.revokeObjectURL(url); };
+        i.onerror=rej;
+        i.src=url;
+      });
+      const w=img.width, h=img.height;
+      var tw=w, th=h;
+      if(Math.max(w,h)>maxSide){
+        if(w>h){ tw=maxSide; th=Math.round(h*maxSide/w); }
+        else{ th=maxSide; tw=Math.round(w*maxSide/h); }
+      }
+      const canvas=document.createElement('canvas');
+      canvas.width=tw; canvas.height=th;
+      const ctx=canvas.getContext('2d');
+      ctx.drawImage(img,0,0,tw,th);
       return canvas.toDataURL('image/jpeg', quality);
     }
 
@@ -272,14 +314,24 @@ return true;
     const placesState = { places: [], categories: new Set() };
 
     function renderCategoryControls(){
-      const c=document.getElementById('catContainer');const l=document.getElementById('legend');c.innerHTML='';l.innerHTML='';
-      [...placesState.categories].forEach(cat=>{
-        const id=`cat_${cat}`;const label=document.createElement('label');
-        label.innerHTML=`<input type="checkbox" class="cat-check" id="${id}" value="${escapeHTML(cat)}" checked> ${escapeHTML(cat)}`;
-        c.appendChild(label);const chip=document.createElement('div');
-        chip.className='chip';chip.innerHTML=`<span>${iconMap[cat]||'📍'}</span>${escapeHTML(cat)}`;l.appendChild(chip);
+      const c=document.getElementById('catContainer');
+      const l=document.getElementById('legend');
+      c.innerHTML=''; l.innerHTML='';
+      var catsArr = Array.from(placesState.categories);
+      catsArr.forEach(function(cat){
+        const id='cat_' + cat;
+        const label=document.createElement('label');
+        label.innerHTML='<input type="checkbox" class="cat-check" id="'+id+'" value="'+escapeHTML(cat)+'" checked> ' + escapeHTML(cat);
+        c.appendChild(label);
+        const chip=document.createElement('div');
+        chip.className='chip';
+        chip.innerHTML='<span>'+ (iconMap[cat] || '📍') +'</span>' + escapeHTML(cat);
+        l.appendChild(chip);
       });
-      c.querySelectorAll('.cat-check').forEach(e=>e.addEventListener('change',applyFilter));
+      var checks = c.querySelectorAll('.cat-check');
+      for(var i=0;i<checks.length;i++){
+        checks[i].addEventListener('change',applyFilter);
+      }
     }
 
     function buildPopupDOM(p){
@@ -289,18 +341,21 @@ return true;
 
       if (p.video) {
         const vbox = document.createElement('div');
-
-        // 先判断抖音，再走 YouTube 降级
+        // 抖音优先，其次 YouTube/其他
         if (!renderDouyinGracefully(vbox, p.video)) {
           renderYouTubeGracefully(vbox, p.video);
         }
-
         wrap.appendChild(vbox);
       }
 
       if(Array.isArray(p.tags)&&p.tags.length){
         const tags=document.createElement('div');
-        p.tags.forEach(t=>{ const s=document.createElement('span'); s.className='tag'; s.textContent='#'+t; tags.appendChild(s); });
+        p.tags.forEach(function(t){
+          const s=document.createElement('span');
+          s.className='tag';
+          s.textContent='#'+t;
+          tags.appendChild(s);
+        });
         wrap.appendChild(tags);
       }
 
@@ -327,10 +382,13 @@ return true;
           const arr = await getComments(cid);
           listBox.innerHTML = '';
           if(!arr.length){
-            const empty=document.createElement('div'); empty.className='cmt-text'; empty.style.color='#94a3b8'; empty.textContent='还没有评论，来当第一位吧～';
+            const empty=document.createElement('div');
+            empty.className='cmt-text';
+            empty.style.color='#94a3b8';
+            empty.textContent='还没有评论，来当第一位吧～';
             listBox.appendChild(empty); return;
           }
-          arr.forEach(item=>{
+          arr.forEach(function(item){
             const it=document.createElement('div'); it.className='cmt-item';
             const meta=document.createElement('div'); meta.className='cmt-meta';
             const nm=document.createElement('span'); nm.textContent=item.nick||'匿名';
@@ -339,7 +397,9 @@ return true;
             const body=document.createElement('div'); body.className='cmt-text'; body.textContent=item.text||''; it.appendChild(body);
             if(Array.isArray(item.imgs)&&item.imgs.length){
               const imgs=document.createElement('div'); imgs.className='cmt-imgs';
-              item.imgs.forEach(src=>{ const im=document.createElement('img'); im.src=src; imgs.appendChild(im); });
+              item.imgs.forEach(function(src){
+                const im=document.createElement('img'); im.src=src; imgs.appendChild(im);
+              });
               it.appendChild(imgs);
             }
             listBox.appendChild(it);
@@ -352,7 +412,7 @@ return true;
 
       renderList();
 
-      submit.addEventListener('click', async ()=>{
+      submit.addEventListener('click', async function(){
         if(!canSubmit(cid)){ alert('操作太频繁，请稍后再试'); return; }
 
         const content=(text.value||'').trim();
@@ -382,35 +442,41 @@ return true;
         }
       });
 
-      refresh.addEventListener('click', ()=> renderList());
+      refresh.addEventListener('click', function(){ renderList(); });
 
       return wrap;
     }
 
     function rebuildMarkers(list){
-      layerGroups.forEach(g=>map.removeLayer(g)); layerGroups.clear();
-      placesState.categories.forEach(cat=>layerGroups.set(cat,L.markerClusterGroup()));
+      layerGroups.forEach(function(g){ map.removeLayer(g); });
+      layerGroups.clear();
+      placesState.categories.forEach(function(cat){
+        layerGroups.set(cat,L.markerClusterGroup());
+      });
 
-      list.forEach(p=>{
+      list.forEach(function(p){
         const m=L.marker(p.coords,{icon:emojiIcon(iconMap[p.category]||'📍')});
         m.bindPopup(buildPopupDOM(p), { maxWidth: 300 });
         (layerGroups.get(p.category) || layerGroups.values().next().value).addLayer(m);
       });
 
-      layerGroups.forEach(g=>g.addTo(map));
+      layerGroups.forEach(function(g){ g.addTo(map); });
       fitAll();
     }
 
     function applyFilter(){
       const checks=Array.from(document.querySelectorAll('.cat-check'));
-      const enabled=new Set(checks.filter(c=>c.checked).map(c=>c.value));
-      const q=(document.getElementById('searchInput')?.value||'').trim().toLowerCase();
+      const enabled=new Set(checks.filter(function(c){return c.checked;}).map(function(c){return c.value;}));
 
-      const filtered=placesState.places.filter(p=>{
+      var s = document.getElementById('searchInput');
+      var q = s ? (s.value || '').trim().toLowerCase() : '';
+
+      const filtered=placesState.places.filter(function(p){
         if(!enabled.has(p.category)) return false;
         if(!q) return true;
-        const inTitle=(p.title||'').toLowerCase().includes(q);
-        const inTags=Array.isArray(p.tags)&&p.tags.join(',').toLowerCase().includes(q);
+        const inTitle=(p.title||'').toLowerCase().indexOf(q) !== -1;
+        const inTags=Array.isArray(p.tags) &&
+          p.tags.join(',').toLowerCase().indexOf(q) !== -1;
         return inTitle||inTags;
       });
 
@@ -420,34 +486,51 @@ return true;
     const flowLayers=[]; let flowAnimRunning=false;
 
     function fitAll(){
-      const groupLayers=[...layerGroups.values()];
-      const flowPolylines=flowLayers.map(o=>o.polyline).filter(Boolean);
-      const flowDots=flowLayers.map(o=>o.dot).filter(Boolean);
-      const layers=[...groupLayers,...flowPolylines,...flowDots];
+      const groupLayers=Array.from(layerGroups.values());
+      const flowPolylines=flowLayers.map(function(o){return o.polyline;}).filter(Boolean);
+      const flowDots=flowLayers.map(function(o){return o.dot;}).filter(Boolean);
+      const layers=[].concat(groupLayers,flowPolylines,flowDots);
       if(!layers.length) return;
       const fg=L.featureGroup(layers);
       map.fitBounds(fg.getBounds().pad(0.2));
     }
 
     document.getElementById('btnFit').onclick=fitAll;
-    document.getElementById('btnReset').onclick=()=>{ const s=document.getElementById('searchInput'); if(s) s.value=''; document.querySelectorAll('.cat-check').forEach(c=>c.checked=true); applyFilter(); };
-    let searchTimer=null; document.getElementById('searchInput').addEventListener('input',()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(applyFilter,250); });
+    document.getElementById('btnReset').onclick=function(){
+      const s=document.getElementById('searchInput');
+      if(s) s.value='';
+      Array.from(document.querySelectorAll('.cat-check')).forEach(function(c){ c.checked=true; });
+      applyFilter();
+    };
+    let searchTimer=null;
+    document.getElementById('searchInput').addEventListener('input',function(){
+      clearTimeout(searchTimer);
+      searchTimer=setTimeout(applyFilter,250);
+    });
 
     function buildMarkers(p){
-      layerGroups.forEach(g=>map.removeLayer(g)); layerGroups.clear();
-      placesState.categories=new Set(p.map(x=>x.category)); placesState.places=p;
-      placesState.categories.forEach(c=>layerGroups.set(c,L.markerClusterGroup()));
+      layerGroups.forEach(function(g){ map.removeLayer(g); });
+      layerGroups.clear();
+      placesState.categories=new Set(p.map(function(x){return x.category;}));
+      placesState.places=p;
+      placesState.categories.forEach(function(c){ layerGroups.set(c,L.markerClusterGroup()); });
       rebuildMarkers(p); renderCategoryControls();
     }
 
-    function clearFlows(){ flowLayers.forEach(o=>{ if(o.polyline) map.removeLayer(o.polyline); if(o.dot) map.removeLayer(o.dot); }); flowLayers.length=0; }
+    function clearFlows(){
+      flowLayers.forEach(function(o){
+        if(o.polyline) map.removeLayer(o.polyline);
+        if(o.dot) map.removeLayer(o.dot);
+      });
+      flowLayers.length=0;
+    }
 
     function startFlowAnimation(){
       if(flowAnimRunning) return;
       flowAnimRunning=true;
-      const step=()=>{
+      const step=function(){
         if(!flowAnimRunning) return;
-        flowLayers.forEach(o=>{
+        flowLayers.forEach(function(o){
           const a=o.coords[o.idx], b=o.coords[o.idx+1];
           if(!b){ o.idx=0; o.phase=0; return; }
           o.phase += o.speed;
@@ -464,17 +547,17 @@ return true;
 
     function buildFlows(flows){
       clearFlows(); if(!flows||!flows.length) return;
-      flows.forEach(f=>{
+      flows.forEach(function(f){
         const c=f.coords||[]; if(c.length<2) return;
         const color=f.color||'#2563eb';
-        const poly=L.polyline(c,{ color, weight:3, opacity:0.9, dashArray:'6 8' }).addTo(map);
-        const dot=L.circleMarker(c[0],{ radius:5, color, weight:2, fillOpacity:1 }).addTo(map);
-        flowLayers.push({ name:f.name||'flow', coords:c, color, polyline:poly, dot, idx:0, phase:0, speed:(f.speed||0.006) });
+        const poly=L.polyline(c,{ color:color, weight:3, opacity:0.9, dashArray:'6 8' }).addTo(map);
+        const dot=L.circleMarker(c[0],{ radius:5, color:color, weight:2, fillOpacity:1 }).addTo(map);
+        flowLayers.push({ name:f.name||'flow', coords:c, color:color, polyline:poly, dot:dot, idx:0, phase:0, speed:(f.speed||0.006) });
       });
       startFlowAnimation();
     }
 
-    // ✅ 12 条路线的中文名称（按顺序）
+    // 12 条路线中文名称
     const FLOW_LABELS = [
       '早茶（青绿）',
       '凉茶铺（蓝色）',
@@ -494,24 +577,23 @@ return true;
       const box=document.getElementById('flowList');
       box.innerHTML='';
 
-      flows.forEach((f, idx)=>{
-        const id = `flow_chk_${idx}`;
+      flows.forEach(function(f, idx){
+        const id = 'flow_chk_' + idx;
         const label = document.createElement('label');
         label.style.display='flex';
         label.style.alignItems='center';
         label.style.gap='6px';
 
-        const labelText = FLOW_LABELS[idx] || (f.name || `线路 ${idx+1}`);
+        const labelText = FLOW_LABELS[idx] || (f.name || ('线路 ' + (idx+1)));
 
-        label.innerHTML = `
-          <input type="checkbox" id="${id}" data-flow-index="${idx}" checked>
-          ${labelText}
-        `;
+        label.innerHTML =
+          '<input type="checkbox" id="'+id+'" data-flow-index="'+idx+'" checked>' +
+          labelText;
 
         box.appendChild(label);
 
-        document.getElementById(id).addEventListener('change', (e)=>{
-          const i = parseInt(e.target.dataset.flowIndex, 10);
+        document.getElementById(id).addEventListener('change', function(e){
+          const i = parseInt(e.target.getAttribute('data-flow-index'), 10);
           const on = e.target.checked;
           const o = flowLayers[i];
           if(!o) return;
@@ -524,25 +606,28 @@ return true;
             if(map.hasLayer(o.dot)) map.removeLayer(o.dot);
           }
 
-          const anyOn = Array.from(document.querySelectorAll('#flowList input[type="checkbox"]')).some(cb=>cb.checked);
+          const anyOn = Array.from(document.querySelectorAll('#flowList input[type="checkbox"]')).some(function(cb){return cb.checked;});
           if(!anyOn) stopFlowAnimation();
           else if(!flowAnimRunning) startFlowAnimation();
         });
       });
     }
 
-    document.getElementById('btnReplayFlows').addEventListener('click',()=>{
-      flowLayers.forEach(o=>{ o.idx=0; o.phase=0; if(o.coords[0]) o.dot.setLatLng(o.coords[0]); });
+    document.getElementById('btnReplayFlows').addEventListener('click',function(){
+      flowLayers.forEach(function(o){
+        o.idx=0; o.phase=0;
+        if(o.coords[0]) o.dot.setLatLng(o.coords[0]);
+      });
       if(!flowAnimRunning){
-        const anyOn = Array.from(document.querySelectorAll('#flowList input[type="checkbox"]')).some(cb=>cb.checked);
+        const anyOn = Array.from(document.querySelectorAll('#flowList input[type="checkbox"]')).some(function(cb){return cb.checked;});
         if(anyOn) startFlowAnimation();
       }
     });
 
-    document.addEventListener('visibilitychange',()=>{
+    document.addEventListener('visibilitychange',function(){
       if(document.hidden) stopFlowAnimation();
       else{
-        const anyOn = Array.from(document.querySelectorAll('#flowList input[type="checkbox"]')).some(cb=>cb.checked);
+        const anyOn = Array.from(document.querySelectorAll('#flowList input[type="checkbox"]')).some(function(cb){return cb.checked;});
         if(anyOn) startFlowAnimation();
       }
     });
@@ -553,23 +638,43 @@ return true;
         if(!res.ok) throw new Error('HTTP '+res.status);
         const json=await res.json();
         let places=[], flows=[];
-        if(Array.isArray(json)){ places=json; }
+
+        if(Array.isArray(json)){
+          places=json;
+        }
         else if(json && json.type==='FeatureCollection'){
-          places=json.features.filter(f=>f.geometry?.type==='Point').map(f=>({
-            title:f.properties?.title??'',
-            category:f.properties?.category??'未分类',
-            description:f.properties?.description??'',
-            video:f.properties?.video??'',
-            tags:f.properties?.tags||[],
-            coords:[f.geometry.coordinates[1], f.geometry.coordinates[0]]
-          }));
-          flows=json.features.filter(f=>f.geometry?.type==='LineString').map((f,i)=>({
-            name:f.properties?.name||`flow-${i+1}`,
-            color:f.properties?.color||'#2563eb',
-            speed:f.properties?.speed||0.006,
-            coords:f.geometry.coordinates.map(([lng,lat])=>[lat,lng])
-          }));
-        } else if (json && typeof json==='object'){
+          var feats = json.features || [];
+          places = feats
+            .filter(function(f){ return f.geometry && f.geometry.type === 'Point'; })
+            .map(function(f){
+              var props = f.properties || {};
+              var g = f.geometry || {};
+              var coords = g.coordinates || [0,0];
+              return {
+                title: props.title || '',
+                category: props.category || '未分类',
+                description: props.description || '',
+                video: props.video || '',
+                tags: props.tags || [],
+                coords: [coords[1], coords[0]]
+              };
+            });
+
+          flows = feats
+            .filter(function(f){ return f.geometry && f.geometry.type === 'LineString'; })
+            .map(function(f,i){
+              var props = f.properties || {};
+              var g = f.geometry || {};
+              var coords = (g.coordinates || []).map(function(p){ return [p[1], p[0]]; });
+              return {
+                name: props.name || ('flow-' + (i+1)),
+                color: props.color || '#2563eb',
+                speed: props.speed || 0.006,
+                coords: coords
+              };
+            });
+        }
+        else if (json && typeof json==='object'){
           places = Array.isArray(json.places) ? json.places : [];
           flows  = Array.isArray(json.flows)  ? json.flows  : [];
         } else {
@@ -585,10 +690,23 @@ return true;
     }
 
     const burger=document.getElementById('burger'); const sidebar=document.getElementById('sidebar');
-    burger.addEventListener('click',()=>{ sidebar.classList.toggle('open'); setTimeout(()=> map.invalidateSize(), 250); });
-    map.on('click',()=>{ if(window.matchMedia('(max-width:900px)').matches){ sidebar.classList.remove('open'); setTimeout(()=> map.invalidateSize(), 250); } });
+    burger.addEventListener('click',function(){
+      sidebar.classList.toggle('open');
+      setTimeout(function(){ map.invalidateSize(); }, 250);
+    });
+    map.on('click',function(){
+      if(window.matchMedia('(max-width:900px)').matches){
+        sidebar.classList.remove('open');
+        setTimeout(function(){ map.invalidateSize(); }, 250);
+      }
+    });
 
-    loadPlaces();
+    // 加一层兜底，避免极端情况直接 throw
+    try {
+      loadPlaces();
+    } catch (e) {
+      console.error('主程序加载失败', e);
+    }
   </script>
 </body>
 </html>
