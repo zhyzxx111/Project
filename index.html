@@ -279,12 +279,14 @@ function renderBilibiliPlayer(container, url){
   container.appendChild(wrap);
   return true;
 }
-    function isXHS(url){
+function isXHS(url){
   return /xiaohongshu\.com/.test(url || '');
 }
 
 function renderXHSGracefully(container, url){
-  if(!isXHS(url)) return false;
+  if(!isXHS(url)) {
+    return false;
+  }
 
   const cover = "https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaohongshu_logo.svg";
 
@@ -299,13 +301,14 @@ function renderXHSGracefully(container, url){
     <img src="${cover}" style="width:100%;display:block;object-fit:contain;max-height:220px;background:#0f172a;">
     <div style="padding:12px 14px;font-size:14px;">
       点击在小红书中查看<br>
-      <span style="opacity:.6;font-size:12px;">${url}</span>
+      <span style="opacity:.6;font-size:12px;">${escapeHTML(url)}</span>
     </div>
   `;
 
   container.appendChild(card);
   return true;
 }
+
 
 
     /* ======= 优雅降级工具结束 ======= */
