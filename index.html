@@ -688,7 +688,7 @@ refresh.addEventListener('click', function(){ renderList(); });
         const labelText = FLOW_LABELS[idx] || (f.name || ('线路 ' + (idx+1)));
 
         label.innerHTML =
-          '<input type="checkbox" id="'+id+'" data-flow-index="'+idx+'" checked>' +
+            '<input type="checkbox" id="'+id+'" data-flow-index="'+idx+'">' +
           labelText;
 
         box.appendChild(label);
@@ -784,6 +784,7 @@ refresh.addEventListener('click', function(){ renderList(); });
         buildMarkers(places);
         buildFlows(flows);
         renderFlowControls(flows);
+        clearFlows();
         fitAll();
       }catch(e){
         console.warn('加载 places.json 失败', e);
