@@ -646,16 +646,45 @@ refresh.addEventListener('click', function(){ renderList(); });
     }
     function stopFlowAnimation(){ flowAnimRunning=false; }
 
-    function buildFlows(flows){
-      clearFlows(); if(!flows||!flows.length) return;
-      flows.forEach(function(f){
-        const c=f.coords||[]; if(c.length<2) return;
-        const color=f.color||'#2563eb';
-        const poly=L.polyline(c,{ color:color, weight:3, opacity:0.9, dashArray:'6 8' });
-        const dot=L.circleMarker(c[0],{ radius:5, color:color, weight:2, fillOpacity:1 });
-        flowLayers.push({ name:f.name||'flow', coords:c, color:color, polyline:poly, dot:dot, idx:0, phase:0, speed:(f.speed||0.006) });
-      });
-    }
+function buildFlows(flows){
+  clearFlows();
+  if(!flows||!flows.length) return;
+
+  flows.forEach(function(f){
+    const c = f.coords || [];
+    if(c.length < 2) return;
+
+    const color = f.color || '#2563eb';
+
+    const poly = L.polyline(c,{
+      color: color,
+      weight: 3,
+      opacity: 0.9,
+      dashArray: '6 8'
+    });
+
+    const dot = L.circleMarker(c[0],{
+      radius:5,
+      color:color,
+      weight:2,
+      fillOpacity:1
+    });
+
+    flowLayers.push({
+      name:f.name||'flow',
+      coords:c,
+      color:color,
+      polyline:poly,
+      dot:dot,
+      idx:0,
+      phase:0,
+      speed:(f.speed||0.006)
+    });
+  });
+
+  console.log('✅ flows loaded:', flowLayers.length);
+}
+
 
     // 12 条路线中文名称
     const FLOW_LABELS = [
@@ -783,7 +812,6 @@ refresh.addEventListener('click', function(){ renderList(); });
         buildMarkers(places);
         buildFlows(flows);
         renderFlowControls(flows);
-        clearFlows();
         fitAll();
       }catch(e){
         console.warn('加载 places.json 失败', e);
