@@ -651,11 +651,10 @@ refresh.addEventListener('click', function(){ renderList(); });
       flows.forEach(function(f){
         const c=f.coords||[]; if(c.length<2) return;
         const color=f.color||'#2563eb';
-        const poly=L.polyline(c,{ color:color, weight:3, opacity:0.9, dashArray:'6 8' }).addTo(map);
-        const dot=L.circleMarker(c[0],{ radius:5, color:color, weight:2, fillOpacity:1 }).addTo(map);
+        const poly=L.polyline(c,{ color:color, weight:3, opacity:0.9, dashArray:'6 8' });
+        const dot=L.circleMarker(c[0],{ radius:5, color:color, weight:2, fillOpacity:1 });
         flowLayers.push({ name:f.name||'flow', coords:c, color:color, polyline:poly, dot:dot, idx:0, phase:0, speed:(f.speed||0.006) });
       });
-      startFlowAnimation();
     }
 
     // 12 条路线中文名称
